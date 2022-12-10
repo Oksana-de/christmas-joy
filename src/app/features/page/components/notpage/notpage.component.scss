@@ -1,0 +1,13 @@
+.wrapper {
+  height: calc(100vh - 80px - 180px);
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .notpage-msg {
+    margin: 0;
+  }
+}
+
