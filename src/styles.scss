@@ -1,1 +1,156 @@
-/* You can add global styles to this file, and also import other style files */
+// Screen
+$desktop-1920: 1440px;
+$desktop-1024: 1024px;
+$tablet: 768px;
+$mobile: 420px;
+
+// Basic Layout
+$margin-basic: 0 auto;
+$width-basic: calc(100% - 40px);
+
+// Fonts
+$neucha-family: 'Neucha', cursive;
+$steppe-family: 'Steppe', Georgia;
+
+// Font-sizes
+// $font-section: 80px;
+// $font-form: 50px;
+// $font-big: 32px;
+// $font-middle: 28px;
+// $font-btn: 24px;
+// $font-small: 22px;
+// $font-smaller: 18px;
+
+// $fontline-section: 90px;
+// $fontline-form: 55px;
+// $fontline-middle: 33px;
+// $fontline-big: 38px;
+// $fontline-btn: 28px;
+// $fontline-small: 26px;
+// $fontline-smaller: 21px;
+
+// Colors
+$dark-bg: #192f2d;
+$light-bg: #1f707f;
+$border-green: #278d9f;
+$light-grey: #c4c4c4;
+
+$dark: #000000;
+$light: #ffffff;
+
+$red-bg: #710707;
+$gold: #9d8665;
+$gold-active: #7e6c51;
+$filler: #666666;
+$controls: #B3B3B3;
+$controls-hover: #989898;
+$bullet-unvisited: #999999;
+$bullet-unvisited-active: #333333;
+$bullet-hover: #710707;
+$pagination-active: #d2b183;
+$pagination-hover: #9d8665;
+$highlight-gold: #caaa7d;
+$red-line: #740c11;
+
+// Filter
+$filter-green: invert(53%) sepia(35%) saturate(2293%) hue-rotate(137deg) brightness(132%) contrast(102%);
+
+// Animation
+$transition-duration: .5s;
+
+
+@mixin neucha-font($color: $light) {
+  font-family: $neucha-family;
+  color: $color;
+  font-weight: 400;
+}
+
+@mixin steppe-font($color: $light) {
+  font-family: $steppe-family;
+  color: $color;
+  font-weight: 400;
+}
+
+@mixin roboto-font($color: $dark, $size: $font-big, $line-height: $fontline-big, $letter-spacing: .05em) {
+  font-family: $roboto-family;
+  font-weight: 400;
+  font-size: $size;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+  color: $color;
+}
+
+@mixin flex($justify-content: space-between, $align-items: center) {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin link($link-color: $light, $link-hover: $gold) {
+  text-decoration: none;
+  color: $link-color;
+  transition: color $transition-duration;
+
+  &:hover {
+      color: $link-hover;
+  }
+}
+
+// @media (max-width: $desktop-1024) {
+//     @mixin roboto-font($color: $dark, $size: $font-big, $line-height: $fontline-big, $letter-spacing: .05em) {
+//         font-size: $font-btn;
+//         line-height: $fontline-btn;
+//     }
+// }
+
+// General
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  @include neucha-font;
+}
+
+.wrapper {
+  max-width: $desktop-1920;
+  width: $width-basic;
+  margin: $margin-basic;
+
+  @media (max-width: $desktop-1024) {
+      max-width: $desktop-1024;
+  }
+
+  @media (max-width: $tablet) {
+      max-width: $tablet;
+  }
+
+  @media (max-width: $mobile) {
+      max-width: $mobile;
+  }
+}
+
+.musthave {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+}
+
+.active {
+  filter: $filter-green;
+  cursor: auto;
+}

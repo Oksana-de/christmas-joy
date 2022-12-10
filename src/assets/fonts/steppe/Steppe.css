@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Steppe';
+  src: url('Steppe.woff2') format('woff2'),
+       url('Steppe.otf') format('opentype');
+  font-style: normal;
+}

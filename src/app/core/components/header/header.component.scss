@@ -1,0 +1,164 @@
+$neucha-family: 'Neucha', cursive;
+$steppe-family: 'Steppe', Georgia;
+
+$light: #ffffff;
+$dark-bg: #192f2d;
+$light-bg: #1f707f;
+$border-green: #278d9f;
+$light-grey: #c4c4c4;
+
+// Filter
+$filter-green: invert(53%) sepia(35%) saturate(2293%) hue-rotate(137deg) brightness(132%) contrast(102%);
+
+// Animation
+$transition-duration: .5s;
+
+%not-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+  @mixin flex($justify-content: space-between, $align-items: center) {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: $justify-content;
+    align-items: $align-items;
+  }
+
+  @mixin link($link-color: $light) {
+    text-decoration: none;
+    color: $link-color;
+    transition: color $transition-duration;
+  }
+
+  @mixin steppe-font($color: $light) {
+    font-family: $steppe-family;
+    color: $color;
+    font-weight: 400;
+  }
+
+.header {
+  height: 80px;
+  background-color: $dark-bg;
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 50px auto minmax(auto, 350px) 40px;
+    column-gap: 40px;
+    align-items: center;
+    height: 100%;
+    background-color: $dark-bg;
+
+    .logo__link {
+        height: 100%;
+        background-image: url('../../../../assets/svg/tree.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        transition: filter $transition-duration;
+
+        &:hover {
+            filter: $filter-green;
+        }
+    }
+
+    .menu__list {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        .menu__item {
+            margin-right: 30px;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+
+        .menu__link {
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 24px;
+            line-height: 26px;
+            color: $light;
+            transition: filter $transition-duration;
+
+            &:hover {
+                filter: $filter-green;
+            }
+        }
+    }
+
+    .search_field {
+        outline: 0;
+        width: 100%;
+        height: 40px;
+        padding: 5px 15px;
+        @include steppe-font;
+        font-size: 18px;
+        color: $light;
+        background-color: $light-bg;
+        background-image: url('../../../../assets/svg/search.svg');
+        background-repeat: no-repeat;
+        background-position: center right 15px;
+        background-size: 20px;
+        border: 3px solid $border-green;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: border-color $transition-duration, background-image $transition-duration;
+        ;
+
+        &::placeholder {
+            color: $light;
+        }
+
+        &:hover,
+        &:focus {
+            border-color: #22dfeb;
+            background-image: url('../../../../assets/svg/search-hover.svg');
+            cursor: text;
+        }
+
+        &:focus {
+            &::placeholder {
+                color: $light-grey;
+            }
+        }
+    }
+
+    .amount-in-cart__wrapper {
+        position: relative;
+        width: 40px;
+        height: 54px;
+        align-self: start;
+        background-image: url('../../../../assets/svg/ball-2.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        .amount-in-cart {
+            position: absolute;
+            left: 2px;
+            bottom: 2px;
+            border-radius: 50%;
+            width: 36px;
+            height: 35px;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            background-color: $border-green;
+            @include steppe-font;
+            font-size: 20px;
+            line-height: 24px;
+            color: $light;
+            cursor: default;
+        }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+// Colors
+$dark-bg: #192f2d;
+$light-bg: #1f707f;
+$border-green: #278d9f;
+$dark: #000000;
+$light: #ffffff;
+
+// Filter
+$filter-green: invert(53%) sepia(35%) saturate(2293%) hue-rotate(137deg) brightness(132%) contrast(102%);
+// Fonts
+$neucha-family: 'Neucha', cursive;
+$steppe-family: 'Steppe', Georgia;
+
+// Animation
+$transition-duration: .5s;
+
+@mixin neucha-font($color: $light) {
+  font-family: $neucha-family;
+  color: $color;
+  font-weight: 400;
+}
+
+@mixin steppe-font($color: $light) {
+  font-family: $steppe-family;
+  color: $color;
+  font-weight: 400;
+}
+
+.wrapper {
+  height: calc(100vh - 80px - 180px);
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .start {
+      display: flex;
+      margin-bottom: 113px;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      max-width: 593px;
+      min-width: 52%;
+      height: 249px;
+      background: radial-gradient(57.23% 248.2% at 107.17% 104.02%, rgba(34, 153, 235, 0.92) 0%, rgba(34, 153, 235, 0.07) 100%),
+      radial-gradient(104.22% 230.94% at -4.22% 0%, #24C5DB 3.62%, rgba(36, 197, 219, 0.26) 55.1%),
+      radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%);
+      border: 2px solid;
+      border-image-source: radial-gradient(57.23% 248.2% at 107.17% 104.02%, rgba(34, 153, 235, 0.92) 0%, rgba(34, 153, 235, 0.07) 100%),
+      radial-gradient(104.22% 230.94% at -4.22% 0%, #24C5DB 3.62%, rgba(36, 197, 219, 0.26) 55.1%);
+      border-radius: 30px;
+
+      .start-txt{
+          margin: 0;
+          padding: 0 40px;
+          text-transform: uppercase;
+          font-size: 53px;
+          line-height: 58px;
+          font-weight: 400;
+      }
+  }
+  .start-link {
+      display: block;
+      padding: 13px 0 12px;
+      text-align: center;
+      width: 320px;
+      height: 54px;
+      border: 3px solid $border-green;
+      text-transform: uppercase;
+      @include steppe-font;
+      font-size: 24px;
+      line-height: 29px;
+      border-radius: 30px;
+      text-decoration: none;
+      background-color: rgba(31, 112, 127, .3);
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      outline: 1px solid;
+      outline-color: rgba(255, 255, 255, 0.7);
+      outline-offset: 0;
+      transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+
+      &:hover {
+          filter: $filter-green;
+          outline-color: rgba(255, 255, 255, 0);
+          outline-offset: 15px;
+      }
+  }
+}

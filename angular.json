@@ -28,6 +28,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/normalize.css/normalize.css",
+              "src/assets/fonts/neucha/NeuchaRegular.css",
+              "src/assets/fonts/steppe/Steppe.css",
               "src/styles.scss"
             ],
             "scripts": []
