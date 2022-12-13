@@ -1,1 +1,234 @@
-<p>toys works!</p>
+<div class="wrapper">
+    <div class="settings">
+        <div class="sort">
+            <h3 class="settings__lbl">
+                sorting
+            </h3>
+            <div class="settings__field sort__area">
+                <select class="sort-method" name="" id="">
+                    <option value="0">-- Choose a sorting method --</option>
+                    <option value="1" data-sort="letter-start">By name from "A" to "Z"</option>
+                    <option value="2" data-sort="letter-end">By name from "Z" to "A"</option>
+                    <option value="3" data-sort="digit-start">By year of purchase ascending</option>
+                    <option value="4" data-sort="digit-end">By year of purchase descending</option>
+                </select>
+
+                <div class="sort-method-style">
+                    -- Choose a sorting method --
+                </div>
+                <div class="sort-options hide">
+                    <div class="sort-option">By name from "A" to "Z"</div>
+                    <div class="sort-option">By name from "Z" to "A"</div>
+                    <div class="sort-option">By year of purchase ascending</div>
+                    <div class="sort-option">By year of purchase descending</div>
+                </div>
+            </div>
+        </div>
+        <div class="categories">
+            <h3 class="settings__lbl">
+                categories
+            </h3>
+            <div class="settings__field category shape">
+                <h4 class="category__lbl">
+                    shape
+                </h4>
+                <div class="category__wrapper">
+                    <div class="shape__wrapper">
+                        <input class="inp__shape" type="checkbox" name="shape" id="shape-bell">
+                        <label class="lbl__shape bell" for="shape-bell">
+                            bell
+                        </label>
+                    </div>
+                    <div class="shape__wrapper">
+                        <input class="inp__shape" type="checkbox" name="shape" id="shape-ball">
+                        <label class="lbl__shape ball" for="shape-ball">
+                            ball
+                        </label>
+                    </div>
+                    <div class="shape__wrapper">
+                        <input class="inp__shape" type="checkbox" name="shape" id="shape-cone">
+                        <label class="lbl__shape cone" for="shape-cone">
+                            cone
+                        </label>
+                    </div>
+                    <div class="shape__wrapper">
+                        <input class="inp__shape" type="checkbox" name="shape" id="shape-snowflake">
+                        <label class="lbl__shape snowflake" for="shape-snowflake">
+                            snowflake
+                        </label>
+                    </div>
+                    <div class="shape__wrapper">
+                        <input class="inp__shape" type="checkbox" name="shape" id="shape-figurine">
+                        <label class="lbl__shape figurine" for="shape-figurine">
+                            figurine
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="settings__field category amount">
+                <h4 class="category__lbl">
+                    number of instances
+                </h4>
+                <input class="range-slider" type="range" name="" id="" min="1" max="12" value="1" step="1">
+                <div class="range-info">
+                    <div class="range-content min">4</div>
+                    <div class="range-content max">12</div>
+                </div>
+            </div>
+            <div class="settings__field category year">
+                <h4 class="category__lbl">
+                    purchase year
+                </h4>
+                <input class="range-slider" type="range" name="" id="" min="0" max="81" value="0" step="1">
+                <div class="range-info">
+                    <div class="range-content min">1940</div>
+                    <div class="range-content max">2022</div>
+                </div>
+            </div>
+            <div class="settings__field category color">
+                <h4 class="category__lbl">
+                    color
+                </h4>
+                <div class="category__wrapper">
+                    <div class="color__wrapper">
+                        <input class="inp__color" type="checkbox" name="color" id="color-white">
+                        <span class="check-color"></span>
+                        <label class="lbl__color white" for="color-white">
+                        </label>
+                    </div>
+                    <div class="color__wrapper">
+                        <input class="inp__color" type="checkbox" name="color" id="color-yellow">
+                        <span class="check-color"></span>
+                        <label class="lbl__color yellow" for="color-yellow">
+                        </label>
+                    </div>
+                    <div class="color__wrapper">
+                        <input class="inp__color" type="checkbox" name="color" id="color-red">
+                        <span class="check-color"></span>
+                        <label class="lbl__color red" for="color-red">
+                        </label>
+                    </div>
+                    <div class="color__wrapper">
+                        <input class="inp__color" type="checkbox" name="color" id="color-blue">
+                        <span class="check-color"></span>
+                        <label class="lbl__color blue" for="color-blue">
+                        </label>
+                    </div>
+                    <div class="color__wrapper">
+                        <input class="inp__color" type="checkbox" name="color" id="color-green">
+                        <span class="check-color"></span>
+                        <label class="lbl__color green" for="color-green">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="settings__field category size">
+                <h4 class="category__lbl">
+                    size
+                </h4>
+                <div class="category__wrapper">
+                    <div class="size__wrapper">
+                        <input class="inp__size" type="checkbox" name="size" id="size-big">
+                        <span class="custom-check"></span>
+                        <label class="lbl__size" for="size-big">
+                            big
+                        </label>
+                    </div>
+                    <div class="size__wrapper">
+                        <input class="inp__size" type="checkbox" name="size" id="size-middle">
+                        <span class="custom-check"></span>
+                        <label class="lbl__size" for="size-middle">
+                            middle
+                        </label>
+                    </div>
+                    <div class="size__wrapper">
+                        <input class="inp__size" type="checkbox" name="size" id="size-small">
+                        <span class="custom-check"></span>
+                        <label class="lbl__size" for="size-small">
+                            small
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="settings__field category fave">
+                <input class="inp__fave" type="checkbox" name="fave" id="fave-check">
+                <span class="custom-check"></span>
+                <label class="lbl__fave" for="fave-check">
+                    favorites only
+                </label>
+            </div>
+        </div>
+        <div class="controls">
+            <button class="control btn">
+                reset filters
+            </button>
+            <button class="control btn">
+                reset settings
+            </button>
+        </div>
+    </div>
+    <div class="toys">
+        <div class="toy">
+            <h3 class="toy-name">
+                Large ball with flower pattern
+            </h3>
+            <div class="toy-img__wrapper">
+                <img class="toy-img" src="./assets/img/toys/1.png" alt="toy-1">
+            </div>
+            <div class="toy-info">
+                <p class="details amount">
+                    Amount:
+                </p>
+                <p class="content">
+                    2
+                </p>
+            </div>
+            <div class="toy-info">
+                <p class="details year">
+                    Year of purchase:
+                </p>
+                <p class="content">
+                    1960
+                </p>
+            </div>
+            <div class="toy-info">
+                <p class="details shape">
+                    Shape of the toy:
+                </p>
+                <p class="content">
+                    ball
+                </p>
+            </div>
+            <div class="toy-info">
+                <p class="details color">
+                    Color of the toy:
+                </p>
+                <p class="content">
+                    yellow
+                </p>
+            </div>
+            <div class="toy-info">
+                <p class="details size">
+                    Size of the toy:
+                </p>
+                <p class="content">
+                    big
+                </p>
+            </div>
+            <div class="toy-info">
+                <p class="details fave">
+                    Favorite:
+                </p>
+                <p class="content">
+                    no
+                </p>
+            </div>
+        </div>
+        <div class="toy"></div>
+        <div class="toy"></div>
+        <div class="toy"></div>
+        <div class="toy"></div>
+        <div class="toy"></div>
+        <div class="toy"></div>
+    </div>
+</div>
