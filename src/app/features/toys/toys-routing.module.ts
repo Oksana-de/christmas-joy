@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TreeComponent } from '../tree/containers/tree/tree.component';
-// import { ToyComponent } from './containers/toy/toy.component';
+import { ToyComponent } from './containers/toy/toy.component';
 import { ToysComponent } from './containers/toys/toys.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ToysComponent
+  },
+  {
+    path: 'add',
+    component: ToyComponent
+  },
+  {
+    path: ':id',
+    component: ToyComponent
   }
 ];
 

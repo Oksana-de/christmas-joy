@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/tree/tree.module').then(m => m.TreeModule),
   },
   {
+    path: 'about',
+    loadChildren: () => import('./features/about/about.module').then(m => m.AboutModule),
+  },
+  {
     path: '**',
     loadChildren: () => import('./features/page/page.module').then(m => m.PageModule)
   }

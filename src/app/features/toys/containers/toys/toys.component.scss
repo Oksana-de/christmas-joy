@@ -48,16 +48,68 @@ $transition-duration: .5s;
 .wrapper {
     display: grid;
     grid-template-columns: 440px 1fr;
+    grid-template-rows: 60px 1fr 80px;
     column-gap: 40px;
+    row-gap: 20px;
     min-height: calc(100vh - 80px - 180px);
     height: auto;
 
+
+    .searchbar {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        align-self: end;
+
+        .search_field {
+
+            outline: 0;
+            width: 100%;
+            height: 40px;
+            padding: 5px 15px;
+            @include steppe-font;
+            font-size: 18px;
+            color: $light;
+            background-color: $light-bg;
+            background-image: url('../../../../../assets/svg/search.svg');
+            background-repeat: no-repeat;
+            background-position: center right 15px;
+            background-size: 20px;
+            border: 3px solid $border-green;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: border-color $transition-duration, background-image $transition-duration;
+            ;
+
+            &::placeholder {
+                color: $light;
+            }
+
+            &:hover,
+            &:focus {
+                border-color: #22dfeb;
+                background-image: url('../../../../../assets/svg/search-hover.svg');
+                cursor: text;
+            }
+
+            &:focus {
+                &::placeholder {
+                    color: $light-grey;
+                }
+            }
+        }
+    }
+
     .settings {
-        padding: 30px 0;
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
         align-self: start;
 
         .settings__field {
             margin-bottom: 40px;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
         }
 
         .settings__lbl {
@@ -90,7 +142,7 @@ $transition-duration: .5s;
 
             .sort__area {
                 position: relative;
-                margin-bottom: 80px;
+                margin-bottom: 50px;
 
                 .sort-method {
                     display: none;
@@ -467,53 +519,69 @@ $transition-duration: .5s;
                 color: $bright-green;
             }
         }
+    }
 
-        .controls {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: center;
+    .controls {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
 
-            .control {
-                display: block;
-                margin-right: 15px;
-                padding: 7px 25px;
-                width: 178px;
-                height: 28px;
-                background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(157, 243, 255, 0.2) 100%);
-                border: 1px solid $border-green;
-                backdrop-filter: blur(15.5px);
-                border-radius: 30px;
-                @include steppe-font;
-                font-size: 12px;
-                line-height: 14px;
-                text-transform: lowercase;
-                cursor: pointer;
-                transition: all $transition-duration;
+        .control {
+            display: block;
+            margin-right: 15px;
+            padding: 7px 25px;
+            width: 178px;
+            height: 28px;
+            background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(157, 243, 255, 0.2) 100%);
+            border: 1px solid $border-green;
+            backdrop-filter: blur(15.5px);
+            border-radius: 30px;
+            @include steppe-font;
+            font-size: 12px;
+            line-height: 14px;
+            text-transform: lowercase;
+            cursor: pointer;
+            transition: all $transition-duration;
 
-                &::first-letter {
-                    text-transform: uppercase;
-                }
+            &::first-letter {
+                text-transform: uppercase;
+            }
 
-                &:last-of-type {
-                    margin-right: 0;
-                }
+            &:last-of-type {
+                margin-right: 0;
+            }
 
-                &:hover {
-                    color: $bright-green;
-                    border-color: $bright-green;
-                }
+            &:hover {
+                color: $bright-green;
+                border-color: $bright-green;
             }
         }
     }
 
     .toys {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
         justify-content: flex-start;
-        padding: 30px 0;
         align-self: start;
+
+        .no-toys__wrapper {
+            width: 100%;
+
+            .no-toys {
+                display: block;
+                width: fit-content;
+                margin: 0 auto;
+                @include steppe-font;
+                font-size: 40px;
+                line-height: 44px;
+            }
+          }
 
         .toy {
             display: flex;
@@ -562,6 +630,71 @@ $transition-duration: .5s;
                 };
             }
 
+        }
+    }
+
+    .link-add__wrapper {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        align-self: end;
+        justify-self: end;
+        padding: 0 20px 0 calc(20px + 20px + 20px);
+        width: fit-content;
+        height: 40px;
+        border-radius: 30px;
+        border: 3px solid $light;
+        background-image: url('../../../../../assets/img/plus-ico.png');
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-size: 20px;
+        background-position: 20px center;
+        cursor: pointer;
+        transition: all $transition-duration;
+
+        .link {
+            display: block;
+            text-decoration: none;
+            @include steppe-font;
+            font-size: 20px;
+            line-height: 34px;
+        }
+
+        &:hover {
+            filter: $filter-green;
+            box-shadow: 0 2px 20px 7px rgb(255 255 255/.7);
+          }
+    }
+
+    .btn-load__wrapper {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+        justify-self: center;
+        align-self: center;
+
+        .btn {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 400px;
+            height: 40px;
+            border-radius: 30px;
+            background-color: transparent;
+            cursor: pointer;
+            transition: all $transition-duration;
+
+            &.btn-load {
+                border: 3px solid $light;
+                @include steppe-font;
+                font-size: 20px;
+                line-height: 22px;
+
+                &:hover {
+                    filter: $filter-green;
+                    box-shadow: 0 2px 20px 7px rgb(255 255 255/.7);
+                }
+            }
         }
     }
 }

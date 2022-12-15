@@ -1,3 +1,12 @@
+$steppe-family: 'Steppe', Georgia;
+$light: #ffffff;
+
+@mixin steppe-font($color: $light) {
+  font-family: $steppe-family;
+  color: $color;
+  font-weight: 400;
+}
+
 .wrapper {
   height: calc(100vh - 80px - 180px);
   display: flex;
@@ -8,6 +17,9 @@
 
   .notpage-msg {
     margin: 0;
+    @include steppe-font;
+    font-size: 40px;
+    line-height: 44px;
   }
 }
 

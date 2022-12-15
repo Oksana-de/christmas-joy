@@ -10,11 +10,13 @@ import { ToysModule } from './features/toys/toys.module';
 import { TreeModule } from './features/tree/tree.module';
 import { SharedModule } from './shared/shared.module';
 import { MainModule } from './features/main/main.module';
+import { AboutModule } from './features/about/about.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
+
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -23,6 +25,7 @@ import { MainModule } from './features/main/main.module';
     MainModule,
     ToysModule,
     TreeModule,
+    AboutModule,
     PageModule,
     SharedModule
   ],

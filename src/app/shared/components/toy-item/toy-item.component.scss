@@ -1,0 +1,149 @@
+$neucha-family: 'Neucha', cursive;
+$steppe-family: 'Steppe', Georgia;
+
+$light: #ffffff;
+$dark-bg: #192f2d;
+$light-bg: #1f707f;
+$bright-green: #22dfeb;
+$border-green: #278d9f;
+$light-grey: #c4c4c4;
+
+// Filter
+$filter-green: invert(53%) sepia(35%) saturate(2293%) hue-rotate(137deg) brightness(132%) contrast(102%);
+
+// Animation
+$transition-duration: .5s;
+
+%not-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+  @mixin flex($justify-content: space-between, $align-items: center) {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: $justify-content;
+    align-items: $align-items;
+  }
+
+  @mixin link($link-color: $light) {
+    text-decoration: none;
+    color: $link-color;
+    transition: color $transition-duration;
+  }
+
+  @mixin neucha-font($color: $light) {
+    font-family: $neucha-family;
+    color: $color;
+    font-weight: 400;
+  }
+
+  @mixin steppe-font($color: $light) {
+    font-family: $steppe-family;
+    color: $color;
+    font-weight: 400;
+  }
+
+.toy {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    gap: 10px;
+    width: 222px;
+    height: 342px;
+    padding: 18px 16px;
+    border: 1px solid;
+    border-image-source: linear-gradient(137.26deg, rgba(255, 255, 255, 0.24) -13.3%, rgba(26, 89, 102, 0.5) 107%);
+    border-radius: 10px;
+    background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 0.5) 0%, rgba(179, 246, 255, 0.5) 100%);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+    transition: all $transition-duration;
+
+    .content,
+    .controls {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 12px;
+    }
+
+    .controls {
+      visibility: hidden;
+    }
+
+    &:hover {
+      box-shadow: 0 2px 20px 7px rgb(255 255 255/.5);
+
+      .controls {
+        visibility: visible;
+      }
+    }
+
+    .toy-name {
+        margin: 0;
+        height: 40px;
+        @include neucha-font;
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .toy-img__wrapper {
+        width: 100%;
+        height: 110px;
+
+        .toy-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .toy-info {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 5px;
+
+        .details,
+        .content {
+            margin: 0;
+            @include steppe-font;
+            font-size: 10px;
+            line-height: 12px;
+        };
+    }
+
+    .btn {
+      margin: 0;
+      padding: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid $light;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: 20px;
+      background-position: center;
+      cursor: pointer;
+      transition: all $transition-duration;
+
+      &.btn-edit {
+        background-image: url('../../../../assets/img/edit-ico.png');
+      }
+
+      &.btn-delete {
+        background-image: url('../../../../assets/img/delete-ico.png');
+      }
+
+      &:hover {
+        filter: $filter-green;
+        box-shadow: 0 2px 20px 7px rgb(255 255 255/.7);
+      }
+    }
+
+    .favorite {
+      border: 4px solid #20b2aa;
+      background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255,255,255,0.5) 0%, rgba(179,246,255,0) 100%);
+    }
+}

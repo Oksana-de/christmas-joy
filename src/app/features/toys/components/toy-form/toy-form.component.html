@@ -1,0 +1,321 @@
+<form
+  class="toy-form"
+  [formGroup]="toysForm"
+>
+    <legend class="form-title">
+      New toy
+    </legend>
+
+    <div class="field-wrapper toy-title">
+      <label class="lbl title-lbl">Title:</label>
+      <input
+      formControlName="title"
+        class="inp title-inp"
+        type="text"
+        placeholder="Some title..."
+        required
+      >
+
+      <div
+        *ngIf="toysForm.controls['title'].invalid && (toysForm.controls['title'].dirty || toysForm.controls['title'].touched)"
+        class="error"
+        [ngClass]="{'err-required': toysForm.controls['title'].errors?.['required']}"
+      >
+        <div *ngIf="toysForm.controls['title'].errors?.['maxLength']">
+          Title must be no more then 50 characters long.
+        </div>
+      </div>
+    </div>
+
+    <div class="field-wrapper toy-picture">
+      <label class="lbl picture-lbl">Picture:</label>
+      <input
+      formControlName="picture"
+        class="inp title-inp"
+        type="text"
+        placeholder="Some picture..."
+      >
+    </div>
+
+    <div class="field-wrapper amount">
+      <label class="lbl amount-lbl" for="">
+        How many toys of this type do you have?
+      </label>
+      <input
+      formControlName="amount"
+        class="inp amount-inp"
+        type="number"
+        name="amountToy"
+        value="1"
+        id=""
+        required
+      >
+
+      <div
+        *ngIf="toysForm.controls['amount'].invalid && (toysForm.controls['amount'].dirty || toysForm.controls['amount'].touched)"
+        class="error"
+        [ngClass]="{'err-required': toysForm.controls['amount'].errors?.['required']}"
+      >
+        <div *ngIf="toysForm.controls['amount'].errors?.['maxlength']">
+          Toy description must be no more then 50 characters long.
+        </div>
+      </div>
+    </div>
+
+    <div class="field-wrapper year">
+      <label class="lbl year-lbl" for="">
+        Purchase year:
+      </label>
+      <input
+        formControlName="year"
+        class="inp year-inp"
+        type="text"
+        name="toyYear"
+        id=""
+        required
+        placeholder="YYYY"
+      >
+
+      <div
+        *ngIf="toysForm.controls['year'].invalid && (toysForm.controls['year'].dirty || toysForm.controls['year'].touched)"
+        class="error"
+        [ngClass]="{'err-required': toysForm.controls['year'].errors?.['required']}"
+      >
+        <div *ngIf="toysForm.controls['year'].errors?.['dateFormat']">
+          The proper date format is MM/DD/YY
+        </div>
+        <div *ngIf="toysForm.controls['year'].errors?.['monthValue']">
+          The proper date format is <span style="font-weight: bold;">MM</span>/DD/YY
+        </div>
+        <div *ngIf="toysForm.controls['year'].errors?.['dateValue']">
+          The proper date format is MM/<span style="font-weight: bold;">DD</span>/YY
+        </div>
+      </div>
+    </div>
+
+    <div class="field-wrapper shape">
+        <fieldset class="fieldset">
+            <legend  class="fieldset-title">
+                Shape:
+            </legend>
+            <label class="radio-lbl shape-lbl">
+                bell
+                <input
+                    formControlName="shape"
+                    class="inp shape-inp"
+                    type="radio"
+                    value="bell"
+                    id="bell-toy"
+                >
+            </label>
+            <label class="radio-lbl shape-lbl">
+                ball
+                <input
+                    formControlName="shape"
+                    class="inp shape-inp"
+                    type="radio"
+                    value="ball"
+                    id="ball-toy"
+                >
+            </label>
+            <label class="radio-lbl shape-lbl">
+                cone
+                <input
+                    formControlName="shape"
+                    class="inp shape-inp"
+                    type="radio"
+                    value="cone"
+                    id="cone-toy"
+                >
+            </label>
+            <label class="radio-lbl shape-lbl">
+                snowflake
+                <input
+                    formControlName="shape"
+                    class="inp shape-inp"
+                    type="radio"
+                    value="snowflake"
+                    id="snowflake-toy"
+                >
+            </label>
+            <label class="radio-lbl shape-lbl">
+                figurine
+                <input
+                    formControlName="shape"
+                    class="inp shape-inp"
+                    type="radio"
+                    value="figurine"
+                    id="figurine-toy"
+                >
+            </label>
+            <div
+              *ngIf="toysForm.controls['shape'].invalid && (toysForm.controls['shape'].dirty || toysForm.controls['shape'].touched)"
+              class="error"
+              [ngClass]="{'err-required': toysForm.controls['shape'].errors?.['required']}"
+            >
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="field-wrapper color">
+        <fieldset class="fieldset">
+            <legend  class="fieldset-title">
+                Primary Color:
+            </legend>
+            <label class="radio-lbl color-lbl">
+                white
+                <input
+                    formControlName="color"
+                    class="inp color-inp"
+                    type="radio"
+                    value="white"
+                    id="white-toy"
+                >
+            </label>
+            <label class="radio-lbl color-lbl">
+                yellow
+                <input
+                    formControlName="color"
+                    class="inp color-inp"
+                    type="radio"
+                    value="yellow"
+                    id="yellow-toy"
+                >
+            </label>
+            <label class="radio-lbl color-lbl">
+                red
+                <input
+                    formControlName="color"
+                    class="inp color-inp"
+                    type="radio"
+                    value="red"
+                    id="red-toy"
+                >
+            </label>
+            <label class="radio-lbl color-lbl">
+                blue
+                <input
+                    formControlName="color"
+                    class="inp color-inp"
+                    type="radio"
+                    value="blue"
+                    id="blue-toy"
+                >
+            </label>
+            <label class="radio-lbl color-lbl">
+                green
+                <input
+                    formControlName="color"
+                    class="inp color-inp"
+                    type="radio"
+                    value="green"
+                    id="green-toy"
+                >
+            </label>
+            <div
+              *ngIf="toysForm.controls['color'].invalid && (toysForm.controls['color'].dirty || toysForm.controls['color'].touched)"
+              class="error"
+              [ngClass]="{'err-required': toysForm.controls['color'].errors?.['required']}"
+            >
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="field-wrapper size">
+        <fieldset class="fieldset">
+            <legend  class="fieldset-title">
+                Size:
+            </legend>
+            <label class="radio-lbl size-lbl">
+                big
+                <input
+                    formControlName="size"
+                    class="inp size-inp"
+                    type="radio"
+                    value="big"
+                    id="big-toy"
+                >
+            </label>
+
+            <label class="radio-lbl size-lbl">
+                middle
+                <input
+                    formControlName="size"
+                    class="inp size-inp"
+                    type="radio"
+                    value="middle"
+                    id="middle-toy"
+                >
+            </label>
+
+            <label class="radio-lbl size-lbl">
+                small
+                <input
+                    formControlName="size"
+                    class="inp size-inp"
+                    type="radio"
+                    value="small"
+                    id="small-toy"
+                >
+            </label>
+            <div
+              *ngIf="toysForm.controls['size'].invalid && (toysForm.controls['size'].dirty || toysForm.controls['size'].touched)"
+              class="error"
+              [ngClass]="{'err-required': toysForm.controls['size'].errors?.['required']}"
+            >
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="field-wrapper fave">
+        <fieldset class="fieldset">
+            <legend  class="fieldset-title">
+                Is this a favorite toy?
+            </legend>
+            <label class="radio-lbl fave-lbl" for="fave-toy">
+                Yes
+                <input
+                    formControlName="fave"
+                    class="inp fave-inp"
+                    type="radio"
+                    [value]="true"
+                    id="fave-toy"
+                >
+            </label>
+
+            <label class="radio-lbl fave-lbl" for="not-fave-toy">
+                No
+                <input
+                    formControlName="fave"
+                    class="inp fave-inp"
+                    type="radio"
+                    [value]="false"
+                    id="not-fave-toy"
+                >
+            </label>
+            <div
+              *ngIf="toysForm.controls['fave'].invalid && (toysForm.controls['fave'].dirty || toysForm.controls['fave'].touched)"
+              class="error"
+              [ngClass]="{'err-required': toysForm.controls['fave'].errors?.['required']}"
+            >
+            </div>
+        </fieldset>
+</div>
+
+  <button
+    class="btn btn-cancel"
+    type="button"
+    routerLink="../"
+  >
+    Cancel
+  </button>
+
+  <button
+    class="btn btn-submit"
+    [disabled]="!isFormValid"
+    (click)="onSubmit()"
+    routerLink="../"
+  >
+    {{ isFormEdited? 'Edit' : 'Save' }}
+  </button>
+</form>

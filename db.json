@@ -1,0 +1,114 @@
+{
+  "toys": [
+    {
+      "id": 1,
+      "title": "Large ball with flower pattern",
+      "picture": "1.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    },
+    {
+      "id": 2,
+      "title": "Green ball with flower pattern",
+      "picture": "2.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    },
+    {
+      "id": 3,
+      "title": "Red spray ball",
+      "picture": "3.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    },
+    {
+      "id": 4,
+      "title": "Big red icicle",
+      "picture": "4.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    },
+    {
+      "title": "Large ball with flower pattern",
+      "picture": "5.png",
+      "amount": 5,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": true,
+      "id": 5
+    },
+    {
+      "id": 6,
+      "title": "Large ball with flower pattern",
+      "picture": "6.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    },
+    {
+      "id": 7,
+      "title": "Green ball with flower pattern",
+      "picture": "7.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    },
+    {
+      "id": 8,
+      "title": "Red spray ball",
+      "picture": "8.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    },
+    {
+      "id": 9,
+      "title": "Big red icicle",
+      "picture": "9.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    },
+    {
+      "id": 10,
+      "title": "Large ball with flower pattern",
+      "picture": "10.png",
+      "amount": 2,
+      "year": 1960,
+      "shape": "ball",
+      "color": "yellow",
+      "size": "big",
+      "fave": false
+    }
+  ]
+}

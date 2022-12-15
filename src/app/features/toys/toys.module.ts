@@ -4,19 +4,24 @@ import { ToysComponent } from './containers/toys/toys.component';
 import { ToyComponent } from './containers/toy/toy.component';
 import { ToysRoutingModule } from './toys-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToyFormComponent } from './components/toy-form/toy-form.component';
 
 @NgModule({
   declarations: [
     ToysComponent,
-    ToyComponent
+    ToyComponent,
+    ToyFormComponent
   ],
   imports: [
     CommonModule,
     ToysRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   exports: [
-    ToysComponent
+    ToysComponent,
+    ToyComponent
   ]
 })
 export class ToysModule { }

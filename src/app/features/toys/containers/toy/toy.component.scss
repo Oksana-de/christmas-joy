@@ -1,0 +1,11 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding-top: 50px;
+
+    .toy-form {
+        width: inherit;
+    }
+}
