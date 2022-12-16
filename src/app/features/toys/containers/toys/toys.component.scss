@@ -744,10 +744,6 @@ $transition-duration: .5s;
           grid-row: 4 / 5;
         }
 
-        @media (max-width: 460px) {
-          width: 250px;
-        }
-
         .btn {
             margin: 0;
             padding: 0;
@@ -766,6 +762,10 @@ $transition-duration: .5s;
                 @include steppe-font;
                 font-size: 20px;
                 line-height: 22px;
+
+                @media (max-width: 460px) {
+                  width: 250px;
+                }
 
                 &:hover {
                     filter: $filter-green;

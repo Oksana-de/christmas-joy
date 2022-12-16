@@ -5,6 +5,11 @@
     width: 90%;
     padding-top: 50px;
 
+    @media (max-width: 460px) {
+      width: auto;
+      padding: 10px;
+    }
+
     .toy-form {
         width: inherit;
     }
