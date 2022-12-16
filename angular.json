@@ -45,8 +45,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "20kb",
+                  "maximumError": "40kb"
                 }
               ],
               "fileReplacements": [
@@ -102,6 +102,14 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/christmas-joy",
+            "netlifyToken": "h0WotwMO8ftFija4zR-shI2af1_2X3WOFKwfxDEzmks",
+            "siteId": "8780b8dd-c995-4f18-83d2-8f6277ab7639"
           }
         }
       }
