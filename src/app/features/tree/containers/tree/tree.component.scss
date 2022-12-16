@@ -1,0 +1,62 @@
+$neucha-family: 'Neucha', cursive;
+$steppe-family: 'Steppe', Georgia;
+
+$light: #ffffff;
+$dark-bg: #192f2d;
+$light-bg: #1f707f;
+$bright-green: #22dfeb;
+$border-green: #278d9f;
+$light-grey: #c4c4c4;
+
+// Filter
+$filter-green: invert(53%) sepia(35%) saturate(2293%) hue-rotate(137deg) brightness(132%) contrast(102%);
+
+  @mixin neucha-font($color: $light) {
+    font-family: $neucha-family;
+    color: $color;
+    font-weight: 400;
+  }
+
+  @mixin steppe-font($color: $light) {
+    font-family: $steppe-family;
+    color: $color;
+    font-weight: 400;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: calc(100vh - 80px - 100px);
+    height: 100%;
+
+      .tree-page {
+        margin: 20px auto;
+        width: 90%;
+        height: auto;
+        padding: 40px;
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        border: 1px solid $light-bg;
+
+        .content {
+          margin: 0 0 20px;
+          @include neucha-font;
+          font-size: 22px;
+          line-height: 24px;
+          letter-spacing: 2px;
+
+          &:last-of-type {
+            margin-bottom: 0;
+            margin-top: 30px;
+          }
+        }
+        .special {
+          display: inline-block;
+          border-radius: 10px;
+          padding: 5px;
+          filter: $filter-green;
+          box-shadow: 0 2px 20px 7px rgb(255 255 255/.7);
+        }
+      }
+  }

@@ -48,10 +48,10 @@ $transition-duration: .5s;
 .wrapper {
     display: grid;
     grid-template-columns: 440px 1fr;
-    grid-template-rows: 60px 1fr 80px;
+    grid-template-rows: 60px 1fr 60px;
     column-gap: 40px;
     row-gap: 20px;
-    min-height: calc(100vh - 80px - 180px);
+    min-height: calc(100vh - 80px - 100px);
     height: auto;
 
 
@@ -103,6 +103,10 @@ $transition-duration: .5s;
         grid-column: 1 / 2;
         grid-row: 2 / 3;
         align-self: start;
+        backdrop-filter: blur(5px);
+        padding: 20px;
+        border-radius: 10px;
+        height: 100%;
 
         .settings__field {
             margin-bottom: 40px;
@@ -567,6 +571,11 @@ $transition-duration: .5s;
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
+        backdrop-filter: blur(5px);
+        height: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        align-content: flex-start;
         justify-content: flex-start;
         align-self: start;
 
