@@ -1,0 +1,8 @@
+{
+    "app_id": "angular-app-qfhxy",
+    "config_version": 20210101,
+    "name": "angular-app",
+    "location": "DE-FF",
+    "provider_region": "aws-eu-central-1",
+    "deployment_model": "LOCAL"
+}

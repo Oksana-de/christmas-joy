@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Toy } from '../../components/interfaces/toy.interface';
 
-const BASE_URL = 'http://localhost:3000';
+import * as Realm from 'realm-web';
+
 const amountToAdd = 5;
 
 let indexStartList = 0;
 let indexEndList = 5;
 let indexCurrentListItem = 0;
 
+let user: any;
 
 @Injectable({
   providedIn: 'root'
@@ -17,31 +19,79 @@ let indexCurrentListItem = 0;
 
 export class ToysApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  getToys(): Observable<Toy[]> {
-    return this.http.get<Toy[]>(`${BASE_URL}/toys?_start=${indexStartList}&_end=${indexEndList}`);
+  initialiseMongoConnection() {
+    const app = new Realm.App({ id: "christmas-ndazv" });
+    // Create an anonymous credential
+    const credentials = Realm.Credentials.anonymous();
+
+    // Authenticate the user
+    return app.logIn(credentials);
+  }
+
+  async getAllToys() {
+    if (!user)
+        user = await this.initialiseMongoConnection();
+    return await user.functions.GetToys();
+  }
+
+  async getToyFromAtlas(id: number) {
+    if (!user)
+        user = await this.initialiseMongoConnection();
+    return await user.functions.GetToy(id);
+  }
+
+  async deleteToyFromAtlas(id: number) {
+    if (!user)
+        user = await this.initialiseMongoConnection();
+    return await user.functions.DeleteToy(id);
+  }
+
+  async editToyFromAtlas(id: number, toy: Toy) {
+    if (!user)
+        user = await this.initialiseMongoConnection();
+    return await user.functions.EditToy(id, toy);
+  }
+
+  async addToyToAtlas(toy: Toy) {
+    if (!user)
+        user = await this.initialiseMongoConnection();
+    return await user.functions.AddToy(toy);
+  }
+
+  // * convert Promise to Observable
+  getToysFromAtlas(): Observable<Toy[]> {
+    return from(this.getAllToys());
   }
 
   addToy(toy: Toy): Observable<Toy[]> {
-    return this.http.post<Toy[]>(`${BASE_URL}/toys`, toy);
+    return from(this.addToyToAtlas(toy));
   }
+
+  // loadToys(): void {
+  //   indexCurrentListItem = indexEndList;
+  //   indexEndList = indexEndList + amountToAdd;
+  //   this.getToys();
+  // }
 
   loadToys(): void {
     indexCurrentListItem = indexEndList;
     indexEndList = indexEndList + amountToAdd;
-    this.getToys();
+    this.getToysFromAtlas();
   }
 
   getToy(id: number): Observable<Toy> {
-    return this.http.get<Toy>(`${BASE_URL}/toys/${id}`);
+    return from(this.getToyFromAtlas(id));
   }
 
   editToy(id: number, toy: Toy): Observable<Toy> {
-    return this.http.put<Toy>(`${BASE_URL}/toys/${id}`, toy)
+    return from(this.editToyFromAtlas(id, toy));
   }
 
   deleteToy(id: number): Observable<Toy> {
-    return this.http.delete<Toy>(`${BASE_URL}/toys/${id}`);
+    return from(this.deleteToyFromAtlas(id));
   }
 }

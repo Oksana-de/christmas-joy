@@ -1,4 +1,5 @@
 export interface Toy {
+  _id?: symbol,
   id: number,
   title: string,
   picture: string,

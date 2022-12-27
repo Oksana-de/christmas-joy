@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, Observable, switchMap, take, tap } from 'rxjs';
+import { Observable, switchMap, take, tap } from 'rxjs';
 import { Toy } from 'src/app/core/components/interfaces/toy.interface';
 import { PreloaderService } from 'src/app/shared/services/preloader.service';
 import { ToysService } from '../../services/toys.service';
@@ -32,10 +32,12 @@ export class ToysComponent implements OnInit {
   data!: Toy[];
 
   ngOnInit(): void {
+
+    this.getToysFromAtlas();
+
     this.initPreloader();
-    this.getToys();
     this.initToys();
-    this.detectSearchToy();
+    // this.detectSearchToy();
   }
 
   initPreloader(): void {
@@ -50,44 +52,43 @@ export class ToysComponent implements OnInit {
 
   handleDeleteBtnClick(id: number): void {
     this.toysService?.deleteToy(id)
-    .pipe(
-      switchMap(() => this.toysService.getToys()),
-      take(1)
-    )
-    .subscribe(
-      res => {
-        this.data = res;
-      }
-    );
+      .pipe(
+        switchMap(() => this.toysService.getToysFromAtlas()),
+        take(1)
+      )
+      .subscribe(
+        res => {
+          this.data = res;
+        }
+      );
   }
 
-  detectSearchToy() {
-    this.searchInput.valueChanges
-    .pipe(
-      tap(() => this.isToys = true),
-      debounceTime(500),
-      distinctUntilChanged()
-    )
-    .subscribe(data => this.filterToys(data));
-  }
+  // detectSearchToy() {
+  //   this.searchInput.valueChanges
+  //   .pipe(
+  //     tap(() => this.isToys = true),
+  //     debounceTime(500),
+  //     distinctUntilChanged()
+  //   )
+  //   .subscribe(data => this.filterToys(data));
+  // }
 
-  filterToys (data: string): void {
+  // filterToys (data: string): void {
+  //   this.toysService.getFilteredToys(data)
+  //   .pipe(
+  //     switchMap(() => this.toysService.getFilteredToys(data))
+  //   )
+  //   .subscribe(
+  //     res => {
+  //       this.isToys = res.length === 0
+  //         ? !this.isToys
+  //         : this.isToys;
+  //     }
+  //   );
+  // }
 
-    this.toysService.getFilteredToys(data)
-    .pipe(
-      switchMap(() => this.toysService.getFilteredToys(data))
-    )
-    .subscribe(
-      res => {
-        this.isToys = res.length === 0
-          ? !this.isToys
-          : this.isToys;
-      }
-    );
-  }
-
-  getToys() {
-    this.toysService.getToys()
+  getToysFromAtlas(): void {
+    this.toysService.getToysFromAtlas()
       .subscribe(res => this.data = res);
   }
 
@@ -97,10 +98,10 @@ export class ToysComponent implements OnInit {
 
   handleLoadMoreBtnClick(): void {
     this.toysService.loadToys();
-    this.toysService
-      .getToys()
-      .subscribe(res => {
-        this.data = res;
-    });
+    // this.toysService
+    //   .getToys()
+    //   .subscribe(res => {
+    //     this.data = res;
+    // });
   }
 }

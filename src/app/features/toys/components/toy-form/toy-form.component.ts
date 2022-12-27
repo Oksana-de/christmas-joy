@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { distinctUntilChanged, pairwise, tap } from 'rxjs';
+import { switchMap, take, tap } from 'rxjs';
 import { Toy } from 'src/app/core/components/interfaces/toy.interface';
 import { ToysService } from '../../services/toys.service';
 
@@ -19,17 +19,17 @@ export class ToyFormComponent implements OnInit {
   isFormEdited!: boolean;
 
   constructor(
-    private toysServise: ToysService,
+    private toysService: ToysService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.id = this.activatedRoute.snapshot.params['id'];
+    this.id = +this.activatedRoute.snapshot.params['id'];
     if (this.id) {
       this.isFormEdited = true;
-      this.getToy();
+      this.getToy(this.id);
     }
   }
 
@@ -44,21 +44,19 @@ export class ToyFormComponent implements OnInit {
       size: ['', [Validators.required]],
       fave: ['', [Validators.required]]
     })
-    // this.toysForm = this.fb.group({
-    //   title: ['', [Validators.required, CustomValidator.checkMaxLength(50)]],
-    //   description: ['', [Validators.required, CustomValidator.checkMaxLength(50)]],
-    //   date: ['', [Validators.required, CustomValidator.checkDateFormat(this.pattern)]],
-    //   duration: ['', [Validators.required, CustomValidator.checkCourseDuration(1, 600)]],
-    //   author: ['Author 1', [Validators.required]]
-    // })
   }
 
   createToy() {
-    this.toysServise.addToy(this.toysForm.value).subscribe();
+    this.toysService.addToy(this.toysForm.value)
+    .pipe(
+      switchMap(() => this.toysService.getToysFromAtlas()),
+      take(1)
+    )
+    .subscribe();
   }
 
   editToy() {
-    this.toysServise.editToy(this.id, this.toysForm.value).subscribe();
+    this.toysService.editToy(this.id, this.toysForm.value).subscribe();
   }
 
   onSubmit(): void {
@@ -67,8 +65,8 @@ export class ToyFormComponent implements OnInit {
       : this.createToy();
   }
 
-  getToy() {
-    this.toysServise.getToy(this.id).pipe(
+  getToy(id: number) {
+    this.toysService.getToy(id).pipe(
       tap(toy => this.toy = toy),
       tap(() => this.toysForm.patchValue(this.toy))
     )

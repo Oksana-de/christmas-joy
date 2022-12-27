@@ -45,6 +45,7 @@
       "fave": false
     },
     {
+      "id": 5,
       "title": "Large ball with flower pattern",
       "picture": "5.png",
       "amount": 5,
@@ -52,8 +53,7 @@
       "shape": "ball",
       "color": "yellow",
       "size": "big",
-      "fave": true,
-      "id": 5
+      "fave": true
     },
     {
       "id": 6,
