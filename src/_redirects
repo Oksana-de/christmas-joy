@@ -1,1 +1,6 @@
-/*  /
+# Redirects from what the browser requests to what we serve
+/start  /start
+/about  /about
+/toys   /toys
+/tree   /tree
+/toys/* /toys
