@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, switchMap, take, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, switchMap, take, tap } from 'rxjs';
 import { Toy } from 'src/app/core/components/interfaces/toy.interface';
 import { PreloaderService } from 'src/app/shared/services/preloader.service';
 import { ToysService } from '../../services/toys.service';
@@ -37,7 +37,7 @@ export class ToysComponent implements OnInit {
 
     this.initPreloader();
     this.initToys();
-    // this.detectSearchToy();
+    this.detectSearchToy();
   }
 
   initPreloader(): void {
@@ -63,29 +63,29 @@ export class ToysComponent implements OnInit {
       );
   }
 
-  // detectSearchToy() {
-  //   this.searchInput.valueChanges
-  //   .pipe(
-  //     tap(() => this.isToys = true),
-  //     debounceTime(500),
-  //     distinctUntilChanged()
-  //   )
-  //   .subscribe(data => this.filterToys(data));
-  // }
+  detectSearchToy() {
+    this.searchInput.valueChanges
+    .pipe(
+      tap(() => this.isToys = true),
+      debounceTime(500),
+      distinctUntilChanged()
+    )
+    .subscribe(data => this.filterToys(data));
+  }
 
-  // filterToys (data: string): void {
-  //   this.toysService.getFilteredToys(data)
-  //   .pipe(
-  //     switchMap(() => this.toysService.getFilteredToys(data))
-  //   )
-  //   .subscribe(
-  //     res => {
-  //       this.isToys = res.length === 0
-  //         ? !this.isToys
-  //         : this.isToys;
-  //     }
-  //   );
-  // }
+  filterToys(data: string): void {
+    this.toysService.getFilteredToys(data)
+    .pipe(
+      switchMap(() => this.toysService.getFilteredToys(data))
+    )
+    .subscribe(
+      res => {
+        this.isToys = res.length === 0
+          ? !this.isToys
+          : this.isToys;
+      }
+    );
+  }
 
   getToysFromAtlas(): void {
     this.toysService.getToysFromAtlas()

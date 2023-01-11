@@ -18,37 +18,21 @@ export class ToysService {
     private preloaderService: PreloaderService
   ) {}
 
-  // getFilteredToys(data: string): Observable<Toy[]> {
-  //   this.preloaderService?.show();
+  getFilteredToys(data: string): Observable<Toy[]> {
+    this.preloaderService?.show();
 
-  //   return this.toysApiService.getToys()
-  //   .pipe(
-  //     map(res => res.filter(toy => toy.title
-  //       .toLowerCase()
-  //       .includes(data.toLowerCase()))),
-  //     tap((toysArr: Toy[]) => this.toys$$
-  //       .next(toysArr)
-  //     ),
-  //     tap(() => this.preloaderService.hide()),
-  //     take(1)
-  //   );
-  // }
-
-  // getFilteredToys(data: string): Observable<Toy[]> {
-  //   this.preloaderService?.show();
-
-  //   return this.toysApiService.getToysFromAtlas()
-  //   .pipe(
-  //     map(res => res.filter(toy => toy.title
-  //       .toLowerCase()
-  //       .includes(data.toLowerCase()))),
-  //     tap((toysArr: Toy[]) => this.toys$$
-  //       .next(toysArr)
-  //     ),
-  //     tap(() => this.preloaderService.hide()),
-  //     take(1)
-  //   );
-  // }
+    return this.toysApiService.getToysFromAtlas()
+    .pipe(
+      map(res => res.filter(toy => toy.title
+        .toLowerCase()
+        .includes(data.toLowerCase()))),
+      tap((toysArr: Toy[]) => this.toys$$
+        .next(toysArr)
+      ),
+      tap(() => this.preloaderService.hide()),
+      take(1)
+    );
+  }
 
   getToysFromAtlas(): Observable<Toy[]> {
     this.preloaderService.show();
