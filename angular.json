@@ -114,7 +114,7 @@
           "builder": "@netlify-builder/deploy:deploy",
           "options": {
             "outputPath": "dist/christmas-joy",
-            "netlifyToken": "h0WotwMO8ftFija4zR-shI2af1_2X3WOFKwfxDEzmks",
+            "netlifyToken": "nUv5R10IgvIrEkEzOtRfMnas3jrsZIgOWVU_FgAmvNg",
             "siteId": "8780b8dd-c995-4f18-83d2-8f6277ab7639"
           }
         }
