@@ -35,31 +35,31 @@ export class ToysApiService {
   async getAllToys() {
     if (!user)
         user = await this.initialiseMongoConnection();
-    return await user.functions.GetToys();
+    return await user.functions.getToys();
   }
 
   async getToyFromAtlas(id: number) {
     if (!user)
         user = await this.initialiseMongoConnection();
-    return await user.functions.GetToy(id);
+    return await user.functions.getToy(id);
   }
 
   async deleteToyFromAtlas(id: number) {
     if (!user)
         user = await this.initialiseMongoConnection();
-    return await user.functions.DeleteToy(id);
+    return await user.functions.deleteToy(id);
   }
 
   async editToyFromAtlas(id: number, toy: Toy) {
     if (!user)
         user = await this.initialiseMongoConnection();
-    return await user.functions.EditToy(id, toy);
+    return await user.functions.editToy(id, toy);
   }
 
   async addToyToAtlas(toy: Toy) {
     if (!user)
         user = await this.initialiseMongoConnection();
-    return await user.functions.AddToy(toy);
+    return await user.functions.addToy(toy);
   }
 
   // * convert Promise to Observable
