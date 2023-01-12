@@ -34,10 +34,10 @@ export class ToysService {
     );
   }
 
-  getToysFromAtlas(): Observable<Toy[]> {
+  getToysFromAtlas(params?: number): Observable<Toy[]> {
     this.preloaderService.show();
 
-    return this.toysApiService.getToysFromAtlas()
+    return this.toysApiService.getToysFromAtlas(params)
       .pipe(
         tap((data: Toy[]) => this.toys$$.next(data)),
         finalize(() => this.preloaderService.hide()),

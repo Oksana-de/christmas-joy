@@ -22,6 +22,7 @@ export class ToysComponent implements OnInit {
 
   isToys: boolean = true;
   searchInput: FormControl = new FormControl('');
+  amountInput: FormControl = new FormControl('');
 
   constructor(
     private toysService: ToysService,
@@ -38,6 +39,7 @@ export class ToysComponent implements OnInit {
     this.initPreloader();
     this.initToys();
     this.detectSearchToy();
+    this.detectFilterParams();
   }
 
   initPreloader(): void {
@@ -73,6 +75,19 @@ export class ToysComponent implements OnInit {
     .subscribe(data => this.filterToys(data));
   }
 
+  detectFilterParams() {
+    this.amountInput.valueChanges
+    .pipe(
+      tap(() => this.isToys = true),
+      debounceTime(500),
+      distinctUntilChanged()
+    )
+    .subscribe(data => {
+      console.log(data);
+      this.getToysFromAtlas(data);
+    });
+  }
+
   filterToys(data: string): void {
     this.toysService.getFilteredToys(data)
     .pipe(
@@ -87,8 +102,9 @@ export class ToysComponent implements OnInit {
     );
   }
 
-  getToysFromAtlas(): void {
-    this.toysService.getToysFromAtlas()
+  getToysFromAtlas(params?: number): void {
+
+    this.toysService.getToysFromAtlas(params)
       .subscribe(res => this.data = res);
   }
 

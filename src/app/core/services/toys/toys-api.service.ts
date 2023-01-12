@@ -32,10 +32,10 @@ export class ToysApiService {
     return app.logIn(credentials);
   }
 
-  async getAllToys() {
+  async getAllToys(params: number) {
     if (!user)
         user = await this.initialiseMongoConnection();
-    return await user.functions.getToys();
+    return await user.functions.getToys(params);
   }
 
   async getToyFromAtlas(id: number) {
@@ -63,8 +63,8 @@ export class ToysApiService {
   }
 
   // * convert Promise to Observable
-  getToysFromAtlas(): Observable<Toy[]> {
-    return from(this.getAllToys());
+  getToysFromAtlas(params?: number): Observable<Toy[]> {
+    return from(this.getAllToys(params!));
   }
 
   addToy(toy: Toy): Observable<Toy[]> {
@@ -80,7 +80,7 @@ export class ToysApiService {
   loadToys(): void {
     indexCurrentListItem = indexEndList;
     indexEndList = indexEndList + amountToAdd;
-    this.getToysFromAtlas();
+    // this.getToysFromAtlas(params);
   }
 
   getToy(id: number): Observable<Toy> {
