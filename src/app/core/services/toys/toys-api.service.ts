@@ -32,7 +32,7 @@ export class ToysApiService {
     return app.logIn(credentials);
   }
 
-  async getAllToys(params: number) {
+  async getAllToys(params: number[]) {
     if (!user)
         user = await this.initialiseMongoConnection();
     return await user.functions.getToys(params);
@@ -63,7 +63,7 @@ export class ToysApiService {
   }
 
   // * convert Promise to Observable
-  getToysFromAtlas(params?: number): Observable<Toy[]> {
+  getToysFromAtlas(params?: number[]): Observable<Toy[]> {
     return from(this.getAllToys(params!));
   }
 

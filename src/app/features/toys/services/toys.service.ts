@@ -34,7 +34,7 @@ export class ToysService {
     );
   }
 
-  getToysFromAtlas(params?: number): Observable<Toy[]> {
+  getToysFromAtlas(params?: number[]): Observable<Toy[]> {
     this.preloaderService.show();
 
     return this.toysApiService.getToysFromAtlas(params)

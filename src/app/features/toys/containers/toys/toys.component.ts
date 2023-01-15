@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Observable, switchMap, take, tap } from 'rxjs';
 import { Toy } from 'src/app/core/components/interfaces/toy.interface';
@@ -20,26 +20,50 @@ export class ToysComponent implements OnInit {
   public loading$!: Observable<boolean>;
   public isLoading!: boolean;
 
+  filterForm!: FormGroup;
+
+  public rangeAccessiableAmount!: string;
+  public rangeAccessiableYear!: string;
+
   isToys: boolean = true;
   searchInput: FormControl = new FormControl('');
-  amountInput: FormControl = new FormControl('');
 
   constructor(
     private toysService: ToysService,
     private preloaderService: PreloaderService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
   data!: Toy[];
 
   ngOnInit(): void {
+    this.initForm();
 
     this.getToysFromAtlas();
 
     this.initPreloader();
     this.initToys();
     this.detectSearchToy();
+
+    this.getToysFromAtlas(Object.values(this.filterForm.controls).map(inst => inst.value));
     this.detectFilterParams();
+  }
+
+  private initForm(): void {
+    this.filterForm = this.fb.group({
+      amountInputMin: [5, [Validators.min(1), Validators.max(12)]],
+      amountInputMax: [10, [Validators.min(1), Validators.max(12)]],
+      yearInputMin: [1940, [Validators.min(1940), Validators.max(2022)]],
+      yearInputMax: [2022, [Validators.min(1940), Validators.max(2022)]]
+    })
+  }
+
+  rangeBackgroundAmount(): string {
+    return `linear-gradient(to right, #fff 0%, #fff ${(Number(this.filterForm.controls['amountInputMin'].value) - 1)/11*100}%, #24c5db ${(Number(this.filterForm.controls['amountInputMin'].value) - 1)/11*100}%, #24c5db ${(Number(this.filterForm.controls['amountInputMax'].value) - 1)/11 * 100}%, #fff ${(Number(this.filterForm.controls['amountInputMax'].value) - 1)/11 * 100}%, #fff 100%)`;
+  }
+  rangeBackgroundYear(): string {
+    return `linear-gradient(to right, #fff 0%, #fff ${(Number(this.filterForm.controls['yearInputMin'].value) - 1940)/(2022 - 1940)*100}%, #24c5db ${(Number(this.filterForm.controls['yearInputMin'].value) - 1940)/(2022 - 1940)*100}%, #24c5db ${(Number(this.filterForm.controls['yearInputMax'].value) - 1940)/(2022 - 1940) * 100}%, #fff ${(Number(this.filterForm.controls['yearInputMax'].value) - 1940)/(2022 - 1940) * 100}%, #fff 100%)`;
   }
 
   initPreloader(): void {
@@ -76,16 +100,38 @@ export class ToysComponent implements OnInit {
   }
 
   detectFilterParams() {
-    this.amountInput.valueChanges
-    .pipe(
-      tap(() => this.isToys = true),
-      debounceTime(500),
-      distinctUntilChanged()
+    Object.values(this.filterForm.controls).map(inst => {
+
+      inst.valueChanges
+      .pipe(
+        tap(() => this.isToys = true),
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe((data: number) => {
+        // TODO: Function
+        if (inst === this.filterForm.controls['amountInputMin'] && inst.value > this.filterForm.controls['amountInputMax'].value) {
+          inst.setValue(this.filterForm.controls['amountInputMax'].value);
+        } else if (inst === this.filterForm.controls['amountInputMax'] && inst.value < this.filterForm.controls['amountInputMin'].value) {
+          inst.setValue(this.filterForm.controls['amountInputMin'].value);
+        } else if (inst === this.filterForm.controls['yearInputMin'] && inst.value > this.filterForm.controls['yearInputMax'].value) {
+          inst.setValue(this.filterForm.controls['yearInputMax'].value);
+        } else if (inst === this.filterForm.controls['yearInputMax'] && inst.value < this.filterForm.controls['yearInputMin'].value) {
+          inst.setValue(this.filterForm.controls['yearInputMin'].value);
+        }
+
+        // TODO: Function
+        this.rangeAccessiableAmount = this.filterForm.controls['amountInputMin'].value === this.filterForm.controls['amountInputMax'].value
+          ? '2'
+          : '0'
+
+        this.rangeAccessiableYear = this.filterForm.controls['yearInputMin'].value === this.filterForm.controls['yearInputMax'].value
+          ? '2'
+          : '0'
+        return this.getToysFromAtlas(Object.values(this.filterForm.controls).map(inst => inst.value));
+      });
+    }
     )
-    .subscribe(data => {
-      console.log(data);
-      this.getToysFromAtlas(data);
-    });
   }
 
   filterToys(data: string): void {
@@ -102,7 +148,7 @@ export class ToysComponent implements OnInit {
     );
   }
 
-  getToysFromAtlas(params?: number): void {
+  getToysFromAtlas(params?: number[]): void {
 
     this.toysService.getToysFromAtlas(params)
       .subscribe(res => this.data = res);

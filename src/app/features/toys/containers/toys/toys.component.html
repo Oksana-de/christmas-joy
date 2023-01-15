@@ -36,7 +36,8 @@
                 </div>
             </div>
         </div>
-        <div class="categories">
+        <form [formGroup]="filterForm" class="categories">
+
             <h3 class="settings__lbl">
                 categories
             </h3>
@@ -81,30 +82,69 @@
                 <h4 class="category__lbl">
                     number of instances
                 </h4>
+                <div class="input-range__wrapper">
+                  <input
+                    formControlName="amountInputMin"
+                    class="range-slider min-value"
+                    [style.background]="rangeBackgroundAmount()"
+                    type="range"
+                    name=""
+                    id=""
+                    min="1"
+                    max="12"
+                    step="1"
+                >
                 <input
-                  [formControl]="amountInput"
-                  class="range-slider"
+                  formControlName="amountInputMax"
+                  class="range-slider max-value"
+                  [style.background]="rangeBackgroundAmount()"
+                  [style.zIndex]="rangeAccessiableAmount"
                   type="range"
                   name=""
                   id=""
                   min="1"
                   max="12"
-                  value="1"
                   step="1"
                 >
+                </div>
                 <div class="range-info">
-                    <div class="range-content min">{{ amountInput.value ? amountInput.value : 1 }}</div>
-                    <div class="range-content max">12</div>
+                  <input class="range-content min" type="number" name="" id="" [value]="filterForm.controls['amountInputMin'].value">
+                  <input class="range-content min" type="number" name="" id="" [value]="filterForm.controls['amountInputMax'].value">
                 </div>
             </div>
             <div class="settings__field category year">
                 <h4 class="category__lbl">
                     purchase year
                 </h4>
-                <input class="range-slider" type="range" name="" id="" min="0" max="81" value="0" step="1">
+
+                <div class="input-range__wrapper">
+                  <input
+                    formControlName="yearInputMin"
+                    class="range-slider min-value"
+                    [style.background]="rangeBackgroundYear()"
+                    type="range"
+                    name=""
+                    id=""
+                    min="1940"
+                    max="2022"
+                    step="1"
+                  >
+                  <input
+                    formControlName="yearInputMax"
+                    class="range-slider max-value"
+                    [style.background]="rangeBackgroundYear()"
+                    [style.zIndex]="rangeAccessiableYear"
+                    type="range"
+                    name=""
+                    id=""
+                    min="1940"
+                    max="2022"
+                    step="1"
+                  >
+                </div>
                 <div class="range-info">
-                    <div class="range-content min">1940</div>
-                    <div class="range-content max">2022</div>
+                  <input class="range-content min" type="number" name="" id="" [value]="filterForm.controls['yearInputMin'].value">
+                  <input class="range-content min" type="number" name="" id="" [value]="filterForm.controls['yearInputMax'].value">
                 </div>
             </div>
             <div class="settings__field category color">
@@ -179,7 +219,7 @@
                     favorites only
                 </label>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="controls">
