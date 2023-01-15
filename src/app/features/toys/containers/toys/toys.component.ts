@@ -55,7 +55,8 @@ export class ToysComponent implements OnInit {
       amountInputMin: [5, [Validators.min(1), Validators.max(12)]],
       amountInputMax: [10, [Validators.min(1), Validators.max(12)]],
       yearInputMin: [1940, [Validators.min(1940), Validators.max(2022)]],
-      yearInputMax: [2022, [Validators.min(1940), Validators.max(2022)]]
+      yearInputMax: [2022, [Validators.min(1940), Validators.max(2022)]],
+      favItem: [false]
     })
   }
 
