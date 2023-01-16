@@ -63,14 +63,11 @@ export class ToysComponent implements OnInit {
       sizes: this.buildSizeData(),
       favItem: [false]
     })
-
   }
 
   data!: Toy[];
 
   ngOnInit(): void {
-    // this.initForm();
-
     this.getToysFromAtlas();
 
     this.initPreloader();
@@ -80,20 +77,7 @@ export class ToysComponent implements OnInit {
     this.getToysFromAtlas(this.filterForm.value);
     this.detectFilterParams();
 
-    console.log((this.filterForm.get('sizes') as FormArray)['controls']);
-
   }
-
-  // private initForm(): void {
-  //   this.filterForm = this.fb.group({
-  //     amountInputMin: [5, [Validators.min(1), Validators.max(12)]],
-  //     amountInputMax: [10, [Validators.min(1), Validators.max(12)]],
-  //     yearInputMin: [1940, [Validators.min(1940), Validators.max(2022)]],
-  //     yearInputMax: [2022, [Validators.min(1940), Validators.max(2022)]],
-  //     sizes: this.buildSizeData(),
-  //     favItem: [false]
-  //   })
-  // }
 
   buildSizeData(): FormArray {
     const arr = this.toysForUser.sizes.map(size => {
@@ -180,8 +164,6 @@ export class ToysComponent implements OnInit {
           ? '2'
           : '0'
 
-          console.log(this.filterForm.value);
-
           const filterCombinationValue = Object.assign({}, this.filterForm.value, {
 
             sizes: this.filterForm.value.sizes.includes(true)
@@ -194,11 +176,6 @@ export class ToysComponent implements OnInit {
                 return this.toysForUser.sizes[i].name;
               })
           });
-
-          console.log(this.filterForm.value);
-
-
-          console.log(filterCombinationValue);
 
         return this.getToysFromAtlas(filterCombinationValue);
       });
