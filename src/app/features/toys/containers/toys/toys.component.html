@@ -184,34 +184,33 @@
                     </div>
                 </div>
             </div>
+
             <div class="settings__field category size">
                 <h4 class="category__lbl">
                     size
                 </h4>
-                <div class="category__wrapper">
-                    <div class="size__wrapper">
-                        <input class="inp__size" type="checkbox" name="size" id="size-big">
+
+                <div
+                  class="category__wrapper"
+                >
+                    <div
+                      *ngFor="let sizeControl of sizeData.controls; let i = index"
+                      class="size__wrapper"
+                    >
+                        <input
+                          [formControl]="getSizesByIndex(i)"
+                          class="inp__size"
+                          type="checkbox"
+                          id={{toysForUser.sizes[i].name}}
+                        >
                         <span class="custom-check"></span>
-                        <label class="lbl__size" for="size-big">
-                            big
-                        </label>
-                    </div>
-                    <div class="size__wrapper">
-                        <input class="inp__size" type="checkbox" name="size" id="size-middle">
-                        <span class="custom-check"></span>
-                        <label class="lbl__size" for="size-middle">
-                            middle
-                        </label>
-                    </div>
-                    <div class="size__wrapper">
-                        <input class="inp__size" type="checkbox" name="size" id="size-small">
-                        <span class="custom-check"></span>
-                        <label class="lbl__size" for="size-small">
-                            small
+                        <label class="lbl__size" for={{toysForUser.sizes[i].name}}>
+                            {{ toysForUser.sizes[i].name }}
                         </label>
                     </div>
                 </div>
             </div>
+
             <div class="settings__field category fave">
                 <input
                 formControlName="favItem"

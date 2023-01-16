@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, tap, take, finalize, switchMap } from 'rxjs';
-import { Toy } from 'src/app/core/components/interfaces/toy.interface';
+import { FilterParametrs, Toy } from 'src/app/core/components/interfaces/toy.interface';
 import { ToysApiService } from 'src/app/core/services/toys/toys-api.service';
 import { PreloaderService } from 'src/app/shared/services/preloader.service';
 
@@ -34,7 +34,7 @@ export class ToysService {
     );
   }
 
-  getToysFromAtlas(params?: number[]): Observable<Toy[]> {
+  getToysFromAtlas(params?: FilterParametrs): Observable<Toy[]> {
     this.preloaderService.show();
 
     return this.toysApiService.getToysFromAtlas(params)

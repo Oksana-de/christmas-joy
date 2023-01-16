@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { Toy } from '../../components/interfaces/toy.interface';
+import { FilterParametrs, Toy } from '../../components/interfaces/toy.interface';
 
 import * as Realm from 'realm-web';
 
@@ -32,7 +32,7 @@ export class ToysApiService {
     return app.logIn(credentials);
   }
 
-  async getAllToys(params: number[]) {
+  async getAllToys(params: FilterParametrs) {
     if (!user)
         user = await this.initialiseMongoConnection();
     return await user.functions.getToys(params);
@@ -63,7 +63,7 @@ export class ToysApiService {
   }
 
   // * convert Promise to Observable
-  getToysFromAtlas(params?: number[]): Observable<Toy[]> {
+  getToysFromAtlas(params?: FilterParametrs): Observable<Toy[]> {
     return from(this.getAllToys(params!));
   }
 

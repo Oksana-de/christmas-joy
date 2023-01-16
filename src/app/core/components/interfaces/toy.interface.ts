@@ -1,3 +1,5 @@
+import { FormControl } from "@angular/forms"
+
 export interface Toy {
   _id?: symbol,
   id: number,
@@ -9,4 +11,13 @@ export interface Toy {
   color: string,
   size: string,
   fave: boolean
+}
+
+export interface FilterParametrs {
+  amountInputMin: number,
+  amountInputMax: number,
+  yearInputMin: number,
+  yearInputMax: number,
+  sizes: (string|boolean)[],
+  favItem: boolean
 }
