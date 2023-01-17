@@ -26,8 +26,8 @@ The maximum functionality of the application is available with a device screen r
 - the ability to search for a card by name (at the beginning of text entry in the **Search for toys** field)
 - the ability to add a new toy card to the database after clicking on the **+ Add toy** button
 - hovering over the card allows to get additional functionality:
-  - data editing, clicking by ![edit](/assets/img/edit-ico.png)
-  - card deleting from the data-base, clicking by ![delete](/assets/img/delete-ico.png)
+  - data editing, clicking by ![edit-ico](https://user-images.githubusercontent.com/77386093/212897142-321c565b-a256-4339-a34f-b2859810afc0.png)
+  - card deleting from the data-base, clicking by ![delete-ico](https://user-images.githubusercontent.com/77386093/212897295-e2334a51-ac53-4c4c-8419-7d080900834a.png)
 > obviously the last 3 actions should be restricted by access rights, which will be implemented soon
 
 ### **DataBase connection**
