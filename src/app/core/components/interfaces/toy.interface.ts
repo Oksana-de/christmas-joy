@@ -18,6 +18,8 @@ export interface FilterParametrs {
   amountInputMax: number,
   yearInputMin: number,
   yearInputMax: number,
+  shapes: (string|boolean)[],
+  colors: (string|boolean)[],
   sizes: (string|boolean)[],
   favItem: boolean
 }

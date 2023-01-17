@@ -124,15 +124,11 @@ export class ToysComponent implements OnInit {
   data!: Toy[];
 
   ngOnInit(): void {
-    this.getToysFromAtlas();
-
     this.initPreloader();
     this.initToys();
     this.detectSearchToy();
-
-    this.getToysFromAtlas(this.filterForm.value);
-    this.showCollection();
     this.detectFilterParams();
+    this.showCollection();
   }
 
   buildSizeData(filter: Filter[]): FormArray {
@@ -292,7 +288,6 @@ export class ToysComponent implements OnInit {
   }
 
   getToysFromAtlas(params?: FilterParametrs): void {
-
     this.toysService.getToysFromAtlas(params)
       .subscribe(res => this.data = res);
   }
