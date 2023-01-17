@@ -33,7 +33,7 @@ The maximum functionality of the application is available with a device screen r
 
 ### **DataBase connection**
 ***
-The database for this application is hosted in the cloud using **MongoDB Atlaы**.
+The database for this application is hosted in the cloud using **MongoDB Atlas**.
 
 ### **Mockup and content**
 ***
