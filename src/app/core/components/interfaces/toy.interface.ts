@@ -21,3 +21,15 @@ export interface FilterParametrs {
   sizes: (string|boolean)[],
   favItem: boolean
 }
+
+export interface Filter {
+  name: string,
+  selected: boolean,
+  id: number
+}
+
+export interface FilterCollection {
+  shapes: Filter[],
+  colors: Filter[],
+  sizes: Filter[]
+}

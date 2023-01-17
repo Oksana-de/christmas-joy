@@ -46,34 +46,22 @@
                     shape
                 </h4>
                 <div class="category__wrapper">
-                    <div class="shape__wrapper">
-                        <input class="inp__shape" type="checkbox" name="shape" id="shape-bell">
-                        <label class="lbl__shape bell" for="shape-bell">
-                            bell
-                        </label>
-                    </div>
-                    <div class="shape__wrapper">
-                        <input class="inp__shape" type="checkbox" name="shape" id="shape-ball">
-                        <label class="lbl__shape ball" for="shape-ball">
-                            ball
-                        </label>
-                    </div>
-                    <div class="shape__wrapper">
-                        <input class="inp__shape" type="checkbox" name="shape" id="shape-cone">
-                        <label class="lbl__shape cone" for="shape-cone">
-                            cone
-                        </label>
-                    </div>
-                    <div class="shape__wrapper">
-                        <input class="inp__shape" type="checkbox" name="shape" id="shape-snowflake">
-                        <label class="lbl__shape snowflake" for="shape-snowflake">
-                            snowflake
-                        </label>
-                    </div>
-                    <div class="shape__wrapper">
-                        <input class="inp__shape" type="checkbox" name="shape" id="shape-figurine">
-                        <label class="lbl__shape figurine" for="shape-figurine">
-                            figurine
+                    <div
+                    *ngFor="let shapeControl of shapeData.controls; let i = index"
+                      class="shape__wrapper"
+                    >
+                        <input
+                          [formControl]="getShapesByIndex(i)"
+                          class="inp__shape"
+                          type="checkbox"
+                          name="shape"
+                          id={{toysForUser.shapes[i].name}}
+                        >
+                        <label
+                          class="lbl__shape {{toysForUser.shapes[i].name}}"
+                          for={{toysForUser.shapes[i].name}}
+                        >
+                          {{toysForUser.shapes[i].name}}
                         </label>
                     </div>
                 </div>
@@ -151,35 +139,24 @@
                 <h4 class="category__lbl">
                     color
                 </h4>
-                <div class="category__wrapper">
-                    <div class="color__wrapper">
-                        <input class="inp__color" type="checkbox" name="color" id="color-white">
+                <div
+                  class="category__wrapper"
+                >
+                    <div
+                    *ngFor="let colorControl of colorData.controls; let i = index"
+                    class="color__wrapper">
+                        <input
+                          [formControl]="getColorsByIndex(i)"
+                          class="inp__color"
+                          type="checkbox"
+                          name="color"
+                          id={{toysForUser.colors[i].name}}
+                        >
                         <span class="check-color"></span>
-                        <label class="lbl__color white" for="color-white">
-                        </label>
-                    </div>
-                    <div class="color__wrapper">
-                        <input class="inp__color" type="checkbox" name="color" id="color-yellow">
-                        <span class="check-color"></span>
-                        <label class="lbl__color yellow" for="color-yellow">
-                        </label>
-                    </div>
-                    <div class="color__wrapper">
-                        <input class="inp__color" type="checkbox" name="color" id="color-red">
-                        <span class="check-color"></span>
-                        <label class="lbl__color red" for="color-red">
-                        </label>
-                    </div>
-                    <div class="color__wrapper">
-                        <input class="inp__color" type="checkbox" name="color" id="color-blue">
-                        <span class="check-color"></span>
-                        <label class="lbl__color blue" for="color-blue">
-                        </label>
-                    </div>
-                    <div class="color__wrapper">
-                        <input class="inp__color" type="checkbox" name="color" id="color-green">
-                        <span class="check-color"></span>
-                        <label class="lbl__color green" for="color-green">
+                        <label
+                          class="lbl__color {{toysForUser.colors[i].name}}"
+                          for={{toysForUser.colors[i].name}}
+                        >
                         </label>
                     </div>
                 </div>

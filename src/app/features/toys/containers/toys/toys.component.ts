@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Observable, switchMap, take, tap } from 'rxjs';
-import { FilterParametrs, Toy } from 'src/app/core/components/interfaces/toy.interface';
+import { Filter, FilterCollection, FilterParametrs, Toy } from 'src/app/core/components/interfaces/toy.interface';
 import { PreloaderService } from 'src/app/shared/services/preloader.service';
 import { ToysService } from '../../services/toys.service';
 
@@ -16,7 +16,61 @@ export class ToysComponent implements OnInit {
 
   @Input() item!: Toy;
 
-  toysForUser = {
+  toysForUser: FilterCollection = {
+    shapes: [
+      {
+        name: 'bell',
+        selected: false,
+        id: 1
+      },
+      {
+        name: 'ball',
+        selected: false,
+        id: 2
+      },
+      {
+        name: 'cone',
+        selected: false,
+        id: 3
+      },
+      {
+        name: 'snowflake',
+        selected: false,
+        id: 4
+      },
+      {
+        name: 'figurine',
+        selected: false,
+        id: 5
+      }
+    ],
+    colors: [
+      {
+        name: 'white',
+        selected: false,
+        id: 1
+      },
+      {
+        name: 'yellow',
+        selected: false,
+        id: 2
+      },
+      {
+        name: 'red',
+        selected: false,
+        id: 3
+      },
+      {
+        name: 'blue',
+        selected: false,
+        id: 4
+      },
+      {
+        name: 'green',
+        selected: false,
+        id: 5
+      }
+    ],
     sizes: [
       {
         name: 'big',
@@ -60,7 +114,9 @@ export class ToysComponent implements OnInit {
       amountInputMax: [10, [Validators.min(1), Validators.max(12)]],
       yearInputMin: [1940, [Validators.min(1940), Validators.max(2022)]],
       yearInputMax: [2022, [Validators.min(1940), Validators.max(2022)]],
-      sizes: this.buildSizeData(),
+      shapes: this.buildSizeData(this.toysForUser.shapes),
+      colors: this.buildSizeData(this.toysForUser.colors),
+      sizes: this.buildSizeData(this.toysForUser.sizes),
       favItem: [false]
     })
   }
@@ -75,21 +131,33 @@ export class ToysComponent implements OnInit {
     this.detectSearchToy();
 
     this.getToysFromAtlas(this.filterForm.value);
+    this.showCollection();
     this.detectFilterParams();
-
   }
 
-  buildSizeData(): FormArray {
-    const arr = this.toysForUser.sizes.map(size => {
-      return this.fb.control(size.selected);
+  buildSizeData(filter: Filter[]): FormArray {
+    const arr: FormControl[] = filter.map(control => {
+      return this.fb.control(control.selected);
     });
     return this.fb.array(arr);
   }
 
+  get shapeData() {
+    return <FormArray>this.filterForm.get('shapes');
+  }
+  get colorData() {
+    return <FormArray>this.filterForm.get('colors');
+  }
   get sizeData() {
     return <FormArray>this.filterForm.get('sizes');
   }
 
+  getShapesByIndex(id: number): FormControl {
+    return this.shapeData.at(id) as FormControl;
+  }
+  getColorsByIndex(id: number): FormControl {
+    return this.colorData.at(id) as FormControl;
+  }
   getSizesByIndex(id: number): FormControl {
     return this.sizeData.at(id) as FormControl;
   }
@@ -144,6 +212,7 @@ export class ToysComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe((data: number) => {
+
         // TODO: Function
         if (inst === this.filterForm.controls['amountInputMin'] && inst.value > this.filterForm.controls['amountInputMax'].value) {
           inst.setValue(this.filterForm.controls['amountInputMax'].value);
@@ -164,23 +233,48 @@ export class ToysComponent implements OnInit {
           ? '2'
           : '0'
 
-          const filterCombinationValue = Object.assign({}, this.filterForm.value, {
-
-            sizes: this.filterForm.value.sizes.includes(true)
-              ? this.filterForm.value.sizes.map((selected: boolean, i: number) => {
-                  return selected
-                      ? this.toysForUser.sizes[i].name
-                      : false;
-                })
-              : this.filterForm.value.sizes.map((selected: boolean, i: number) => {
-                return this.toysForUser.sizes[i].name;
-              })
-          });
-
-        return this.getToysFromAtlas(filterCombinationValue);
+        this.showCollection();
       });
     }
     )
+  }
+
+  showCollection() {
+    const filterCombinationValue = Object.assign({}, this.filterForm.value, {
+      shapes: this.assignFilterValuesShapes(),
+      colors: this.assignFilterValuesColors(),
+      sizes: this.assignFilterValuesSizes()
+    });
+
+    return this.getToysFromAtlas(filterCombinationValue);
+  }
+
+  assignFilterValuesShapes() {
+    return this.filterForm.value.shapes.includes(true)
+      ? this.filterForm.value.shapes.map((selected: boolean, i: number) => {
+          return selected
+              ? this.toysForUser.shapes[i].name
+              : false;
+        })
+      : this.filterForm.value.shapes.map((selected: boolean, i: number) => this.toysForUser.shapes[i].name)
+  }
+  assignFilterValuesColors() {
+    return this.filterForm.value.colors.includes(true)
+      ? this.filterForm.value.colors.map((selected: boolean, i: number) => {
+          return selected
+              ? this.toysForUser.colors[i].name
+              : false;
+        })
+      : this.filterForm.value.colors.map((selected: boolean, i: number) => this.toysForUser.colors[i].name)
+  }
+  assignFilterValuesSizes() {
+    return this.filterForm.value.sizes.includes(true)
+      ? this.filterForm.value.sizes.map((selected: boolean, i: number) => {
+          return selected
+              ? this.toysForUser.sizes[i].name
+              : false;
+        })
+      : this.filterForm.value.sizes.map((selected: boolean, i: number) => this.toysForUser.sizes[i].name)
   }
 
   filterToys(data: string): void {
