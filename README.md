@@ -28,8 +28,8 @@ The maximum functionality of the application is available with a device screen r
 - hovering over the card allows to get additional functionality:
   - data editing, pushing a button with a pencil
   - card deleting from the data-base, pushing a button with a bucket
-  
-*obviously the last 3 actions should be restricted by access rights, which will be implemented soon*
+
+*** obviously the last 3 actions should be restricted by access rights, which will be implemented soon*
 
 ### **DataBase connection**
 ***
