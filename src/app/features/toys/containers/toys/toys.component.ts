@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Observable, switchMap, take, tap } from 'rxjs';
@@ -9,7 +10,22 @@ import { ToysService } from '../../services/toys.service';
 @Component({
   selector: 'app-toys',
   templateUrl: './toys.component.html',
-  styleUrls: ['./toys.component.scss']
+  styleUrls: ['./toys.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('openFilterMenu', style({
+        display: 'flex',
+        left: '10px'
+      })),
+      state('closedFilterMenu', style({
+        display: 'block',
+        left: 'calc(-700px)'
+      })),
+      transition('openFilterMenu <=> closedFilterMenu', [
+        animate('.5s')
+      ])
+    ])
+  ]
 })
 
 export class ToysComponent implements OnInit {
@@ -122,6 +138,7 @@ export class ToysComponent implements OnInit {
   }
 
   data!: Toy[];
+  isOpen: boolean = false;
 
   ngOnInit(): void {
     this.initPreloader();
@@ -169,6 +186,10 @@ export class ToysComponent implements OnInit {
     this.preloaderService.loading$
       ?.pipe(tap(val => this.isLoading = val))
       .subscribe();
+  }
+
+  toggleMenuState(): void {
+    this.isOpen = !this.isOpen;
   }
 
   handleEditBtnClick(id: number): void {

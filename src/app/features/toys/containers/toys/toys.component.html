@@ -11,7 +11,21 @@
         >
     </div>
 
-    <div class="settings">
+    <div class="sort-filter-controls">
+      <button
+        (click)="toggleMenuState()"
+        class="filter-btn control"
+      >
+        filter
+      </button>
+      <button class="sort-btn control">
+        sort
+      </button>
+    </div>
+
+    <div
+      class="settings"
+    >
         <div class="sort">
             <h3 class="settings__lbl">
                 sorting
@@ -36,7 +50,16 @@
                 </div>
             </div>
         </div>
-        <form [formGroup]="filterForm" class="categories">
+        <form
+          [@openClose]="isOpen ? 'openFilterMenu' : 'closedFilterMenu'"
+          [formGroup]="filterForm"
+          class="categories"
+        >
+          <button
+            (click)="toggleMenuState()"
+            class="close-filter-btn"
+          >
+          </button>
 
             <h3 class="settings__lbl">
                 categories

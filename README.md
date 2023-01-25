@@ -24,6 +24,7 @@ The maximum functionality of the application is available with a device screen r
 - preloader functionality
 - dynamic generation of a list of the cards with elements from the database (Christmas decorations with descriptions)
 - the ability to search for a card by name (at the beginning of text entry in the **Search for toys** field)
+- filtering toys by shape / quantity / year of purchase / color / size and special treatment
 - the ability to add a new toy card to the database after clicking on the **+ Add toy** button
 - hovering over the card allows to get additional functionality:
   - data editing, pushing a button with a pencil
