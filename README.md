@@ -22,6 +22,7 @@ The maximum functionality of the application is available with a device screen r
 - routing
 - page 404
 - preloader functionality
+- animated opening / closing of the section with filters when the screen resolution is equal to or less than 768px
 - dynamic generation of a list of the cards with elements from the database (Christmas decorations with descriptions)
 - the ability to search for a card by name (at the beginning of text entry in the **Search for toys** field)
 - filtering toys by shape / quantity / year of purchase / color / size and special treatment
