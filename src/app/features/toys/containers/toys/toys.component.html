@@ -11,7 +11,21 @@
         >
     </div>
 
-    <div class="settings">
+    <div class="sort-filter-controls">
+      <button
+        (click)="toggleMenuState()"
+        class="filter-btn control"
+      >
+        filter
+      </button>
+      <button class="sort-btn control">
+        sort
+      </button>
+    </div>
+
+    <div
+      class="settings"
+    >
         <div class="sort">
             <h3 class="settings__lbl">
                 sorting
@@ -21,8 +35,8 @@
                     <option value="0">-- Choose a sorting method --</option>
                     <option value="1" data-sort="letter-start">By name from "A" to "Z"</option>
                     <option value="2" data-sort="letter-end">By name from "Z" to "A"</option>
-                    <option value="3" data-sort="digit-start">By year of purchase ascending</option>
-                    <option value="4" data-sort="digit-end">By year of purchase descending</option>
+                    <option value="3" data-sort="digit-start">By year of production ascending</option>
+                    <option value="4" data-sort="digit-end">By year of production descending</option>
                 </select>
 
                 <div class="sort-method-style">
@@ -31,12 +45,21 @@
                 <div class="sort-options hide">
                     <div class="sort-option">By name from "A" to "Z"</div>
                     <div class="sort-option">By name from "Z" to "A"</div>
-                    <div class="sort-option">By year of purchase ascending</div>
-                    <div class="sort-option">By year of purchase descending</div>
+                    <div class="sort-option">By year of production ascending</div>
+                    <div class="sort-option">By year of production descending</div>
                 </div>
             </div>
         </div>
-        <form [formGroup]="filterForm" class="categories">
+        <form
+          [@openClose]="isOpen ? 'openFilterMenu' : 'closedFilterMenu'"
+          [formGroup]="filterForm"
+          class="categories"
+        >
+          <button
+            (click)="toggleMenuState()"
+            class="close-filter-btn"
+          >
+          </button>
 
             <h3 class="settings__lbl">
                 categories
@@ -102,7 +125,7 @@
             </div>
             <div class="settings__field category year">
                 <h4 class="category__lbl">
-                    purchase year
+                  year of production
                 </h4>
 
                 <div class="input-range__wrapper">
@@ -114,7 +137,7 @@
                     name=""
                     id=""
                     min="1940"
-                    max="2022"
+                    max="2023"
                     step="1"
                   >
                   <input
@@ -126,7 +149,7 @@
                     name=""
                     id=""
                     min="1940"
-                    max="2022"
+                    max="2023"
                     step="1"
                   >
                 </div>
@@ -174,14 +197,14 @@
                       *ngFor="let sizeControl of sizeData.controls; let i = index"
                       class="size__wrapper"
                     >
-                        <input
-                          [formControl]="getSizesByIndex(i)"
-                          class="inp__size"
-                          type="checkbox"
-                          id={{toysForUser.sizes[i].name}}
-                        >
-                        <span class="custom-check"></span>
                         <label class="lbl__size" for={{toysForUser.sizes[i].name}}>
+                            <input
+                                [formControl]="getSizesByIndex(i)"
+                                class="inp__size"
+                                type="checkbox"
+                                id={{toysForUser.sizes[i].name}}
+                            >
+                            <span class="custom-check"></span>
                             {{ toysForUser.sizes[i].name }}
                         </label>
                     </div>
@@ -189,16 +212,16 @@
             </div>
 
             <div class="settings__field category fave">
-                <input
-                formControlName="favItem"
-                class="inp__fave"
-                type="checkbox"
-                name="fave"
-                id="fave-check"
-              >
-                <span class="custom-check"></span>
                 <label class="lbl__fave" for="fave-check">
-                    favorites only
+                    <input
+                        formControlName="favItem"
+                        class="inp__fave"
+                        type="checkbox"
+                        name="fave"
+                        id="fave-check"
+                    >
+                    <span class="custom-check"></span>
+                        favorites only
                 </label>
             </div>
         </form>

@@ -5,6 +5,7 @@ $light: #ffffff;
 $dark-bg: #192f2d;
 $light-bg: #1f707f;
 $border-green: #278d9f;
+$bright-green: #22dfeb;
 $light-grey: #c4c4c4;
 
 // Filter
@@ -40,29 +41,41 @@ $transition-duration: .5s;
 
 .toy-form {
     display: grid;
-    grid-template-columns: 1fr 150px;
-
-    grid-template-areas: "form-name form-name"
-    "title title"
-    "picture picture"
-    "amount amount"
-    "year year"
-    "shape shape"
-    "color color"
-    "size size"
-    "fave fave"
-    "btn-cancel btn-submit";
+    grid-template-columns: 75px auto repeat(2, 30%);
+    grid-template-areas: "form-name toy-title toy-title toy-title"
+    "picture picture picture picture"
+    "amount amount amount amount"
+    "year year year year"
+    "shape shape color size"
+    "fave fave fave fave"
+    "controls controls controls controls";
     gap: 20px;
     margin: 0 auto;
-    width: fit-content;
+    width: 80%;
     height: 100%;
     padding: 40px;
     backdrop-filter: blur(10px);
     border-radius: 10px;
     border: 1px solid $light-bg;
 
+    @media (max-width: 900px) {
+      grid-template-columns: 75px 1fr;
+      grid-template-areas: "form-name toy-title"
+      "picture picture"
+      "amount amount"
+      "year year"
+      "shape shape"
+      "color color"
+      "size size"
+      "fave fave"
+      "controls controls";
+    }
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+
     @media (max-width: 460px) {
-      gap: 10px;
       padding: 20px;
     }
 
@@ -74,7 +87,7 @@ $transition-duration: .5s;
     }
 
     .toy-title {
-        grid-area: title;
+        grid-area: toy-title;
     }
 
     .toy-picture {
@@ -84,9 +97,10 @@ $transition-duration: .5s;
     .amount {
         grid-area: amount;
 
-        .amount-inp {
-          width: 50px;
-          text-align: center;
+        .amount-inp::-webkit-outer-spin-button,
+        .amount-inp::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
         }
     }
 
@@ -108,15 +122,12 @@ $transition-duration: .5s;
 
     .fave {
         grid-area: fave;
+        margin-bottom: 20px;
     }
 
     .field-wrapper {
         position: relative;
-        margin-bottom: 15px;
-
-        &:last-of-type {
-            margin-bottom: 0;
-        }
+        display: grid;
 
         &::before {
             position: absolute;
@@ -131,6 +142,63 @@ $transition-duration: .5s;
         &:has(> .err-required)::before {
             color: red;
         }
+
+        @media (max-width: 768px) {
+          margin-bottom: 20px;
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+
+        @media (max-width: 420px) {
+          margin-bottom: 10px;
+        }
+    }
+
+    .inp {
+      width: calc(100% - 60px);
+      height: 30px;
+      padding: 0 5px;
+      background-color: transparent;
+      outline: none;
+      border: 1px solid $light;
+      border-radius: 5px;
+      color: $light;
+      letter-spacing: 1.2px;
+      font-size: 14px;
+      line-height: 30px;
+      cursor: text;
+      transition: all $transition-duration;
+
+      &:focus,
+      &:hover {
+          filter: $filter-green;
+          box-shadow: 0 2px 20px 7px rgb(255 255 255/.7);
+      }
+
+      &::placeholder {
+        font-size: 14px;
+        line-height: 30px;
+        color: $light;
+        opacity: .7;
+      }
+    }
+
+    .select-inp {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .lbl {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 19px;
+
+      @media (max-width: 768px) {
+        margin-bottom: 10px;
+      }
     }
 
     .fieldset {
@@ -138,62 +206,74 @@ $transition-duration: .5s;
         padding: 0;
         border-style: none;
 
-        .fieldset-title {
-            margin: 0 0 10px;
-            font-size: 24px;
-            line-height: 24px;
-        }
-
-        .lbl {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 16px;
-            line-height: 19px;
-        }
-
-        .inp {
-            display: block;
-            padding: 12.93px 10px;
-            width: 100%;
-            height: 40px;
-            border-radius: 5px;
-            border: 1px solid #d9dbe3;
-            outline: none;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 13.3px;
-            line-height: 15px;
-            color: #000000;
-            cursor: pointer;
-
-            &:focus {
-                outline: 1px solid #414451
-            }
-
-            &::placeholder {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 13.3px;
-                line-height: 15px;
-                color: #808080;
-            }
-        }
-
         .radio-lbl {
+            position: relative;
             display: inline-flex;
             align-items: center;
             margin-right: 20px;
-            font-size: 20px;
-            line-height: 22px;
+            padding: 0 25px 0 0;
+            font-size: 16px;
+            line-height: 19px;
             cursor: pointer;
+            transition: all $transition-duration;
 
             &:last-of-type {
                 margin-right: 0;
             }
 
             .inp {
-                margin-left: 10px;
-                height: auto;
+              display: none;
+            }
+
+            &:hover {
+              color: $bright-green;
+
+              .custom-check {
+                opacity: .7;
+              }
             }
         }
+
+        .custom-check {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 20px;
+          height: 20px;
+          background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(157, 243, 255, 0.2) 100%);
+          border: 1px solid $border-green;
+          backdrop-filter: blur(15.5px);
+          border-radius: 50%;
+          transition: all $transition-duration;
+
+          &::after {
+              position: absolute;
+              content: '';
+              opacity: 0;
+              top: 4px;
+              left: 4px;
+              width: 10px;
+              height: 10px;
+              background-color: $bright-green;
+              border-radius:50%;
+          }
+      }
+
+      .fave-inp:checked ~ .custom-check::after {
+        opacity: 1;
+        border-color: $bright-green;
+      }
+
+      .fave-inp:checked ~ .radio-lbl {
+          color: $bright-green;
+      }
+    }
+
+    .form-controls {
+      grid-area: controls;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
     }
 
     .btn {
@@ -214,13 +294,10 @@ $transition-duration: .5s;
         }
 
         &.btn-cancel {
-            grid-area: btn-cancel;
-            justify-self: start;
+          margin-right: 20px;
         }
 
         &.btn-submit {
-            grid-area: btn-submit;
-
             &:disabled {
                 cursor: auto;
                 opacity: .5;
@@ -230,6 +307,14 @@ $transition-duration: .5s;
                     box-shadow: none;
                 }
             }
+        }
+
+        @media (max-width: 1024px) {
+          padding: 5px 10px;
+          height: 30px;
+          border-width: 2px;
+          font-size: 16px;
+          line-height: 19px;
         }
     }
 }

@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Observable, switchMap, take, tap } from 'rxjs';
@@ -9,7 +10,22 @@ import { ToysService } from '../../services/toys.service';
 @Component({
   selector: 'app-toys',
   templateUrl: './toys.component.html',
-  styleUrls: ['./toys.component.scss']
+  styleUrls: ['./toys.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('openFilterMenu', style({
+        display: 'flex',
+        left: '10px'
+      })),
+      state('closedFilterMenu', style({
+        display: 'block',
+        left: 'calc(-700px)'
+      })),
+      transition('openFilterMenu <=> closedFilterMenu', [
+        animate('.5s')
+      ])
+    ])
+  ]
 })
 
 export class ToysComponent implements OnInit {
@@ -112,8 +128,8 @@ export class ToysComponent implements OnInit {
     this.filterForm = this.fb.group({
       amountInputMin: [5, [Validators.min(1), Validators.max(12)]],
       amountInputMax: [10, [Validators.min(1), Validators.max(12)]],
-      yearInputMin: [1940, [Validators.min(1940), Validators.max(2022)]],
-      yearInputMax: [2022, [Validators.min(1940), Validators.max(2022)]],
+      yearInputMin: [1940, [Validators.min(1940), Validators.max(2023)]],
+      yearInputMax: [2023, [Validators.min(1940), Validators.max(2023)]],
       shapes: this.buildSizeData(this.toysForUser.shapes),
       colors: this.buildSizeData(this.toysForUser.colors),
       sizes: this.buildSizeData(this.toysForUser.sizes),
@@ -122,6 +138,7 @@ export class ToysComponent implements OnInit {
   }
 
   data!: Toy[];
+  isOpen: boolean = false;
 
   ngOnInit(): void {
     this.initPreloader();
@@ -162,13 +179,17 @@ export class ToysComponent implements OnInit {
     return `linear-gradient(to right, #fff 0%, #fff ${(Number(this.filterForm.controls['amountInputMin'].value) - 1)/11*100}%, #24c5db ${(Number(this.filterForm.controls['amountInputMin'].value) - 1)/11*100}%, #24c5db ${(Number(this.filterForm.controls['amountInputMax'].value) - 1)/11 * 100}%, #fff ${(Number(this.filterForm.controls['amountInputMax'].value) - 1)/11 * 100}%, #fff 100%)`;
   }
   rangeBackgroundYear(): string {
-    return `linear-gradient(to right, #fff 0%, #fff ${(Number(this.filterForm.controls['yearInputMin'].value) - 1940)/(2022 - 1940)*100}%, #24c5db ${(Number(this.filterForm.controls['yearInputMin'].value) - 1940)/(2022 - 1940)*100}%, #24c5db ${(Number(this.filterForm.controls['yearInputMax'].value) - 1940)/(2022 - 1940) * 100}%, #fff ${(Number(this.filterForm.controls['yearInputMax'].value) - 1940)/(2022 - 1940) * 100}%, #fff 100%)`;
+    return `linear-gradient(to right, #fff 0%, #fff ${(Number(this.filterForm.controls['yearInputMin'].value) - 1940)/(2023 - 1940)*100}%, #24c5db ${(Number(this.filterForm.controls['yearInputMin'].value) - 1940)/(2023 - 1940)*100}%, #24c5db ${(Number(this.filterForm.controls['yearInputMax'].value) - 1940)/(2023 - 1940) * 100}%, #fff ${(Number(this.filterForm.controls['yearInputMax'].value) - 1940)/(2023 - 1940) * 100}%, #fff 100%)`;
   }
 
   initPreloader(): void {
     this.preloaderService.loading$
       ?.pipe(tap(val => this.isLoading = val))
       .subscribe();
+  }
+
+  toggleMenuState(): void {
+    this.isOpen = !this.isOpen;
   }
 
   handleEditBtnClick(id: number): void {
