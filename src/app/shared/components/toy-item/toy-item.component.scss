@@ -60,8 +60,10 @@ $transition-duration: .5s;
     cursor: pointer;
     transition: all $transition-duration;
 
-    .content,
+    // .content,
     .controls {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
       display: flex;
       flex-direction: column;
       flex-wrap: nowrap;
@@ -78,25 +80,33 @@ $transition-duration: .5s;
       .controls {
         visibility: visible;
       }
+
+      .details.fave {
+        box-shadow: 0 2px 20px 7px rgb(255 255 255 / 70%);
+      }
     }
 
     .toy-name {
-        margin: 0;
-        height: 40px;
-        @include neucha-font;
-        font-size: 18px;
-        line-height: 20px;
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      margin: 0;
+      height: 40px;
+      @include neucha-font;
+      font-size: 18px;
+      line-height: 20px;
     }
 
     .toy-img__wrapper {
-        width: 100%;
-        height: 110px;
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+      width: 100%;
+      height: 110px;
 
-        .toy-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+      .toy-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+      }
     }
 
     .toy-info {
@@ -105,13 +115,42 @@ $transition-duration: .5s;
         justify-content: flex-start;
         gap: 5px;
 
+        &.amount {
+          grid-column: 1/3;
+          grid-row: 3/4;
+        }
+
+        &.year {
+          grid-column: 1/3;
+          grid-row: 4/5;
+        }
+
+        &.size {
+          grid-column: 1/3;
+          grid-row: 5/6;
+        }
+
+        &.fave {
+          grid-column: 1/3;
+          grid-row: 6/7;
+          justify-content: flex-end;
+        }
+
         .details,
         .content {
             margin: 0;
             @include steppe-font;
-            font-size: 10px;
-            line-height: 12px;
+            font-size: 16px;
+            line-height: 20px;
         };
+
+        .fave {
+          width: 30px;
+          height: 30px;
+          background-image: url(../../../../assets/svg/heart-regular.svg);
+          filter: invert(53%) sepia(35%) saturate(2293%) hue-rotate(137deg) brightness(132%) contrast(102%);
+          transition: all $transition-duration;
+        }
     }
 
     .btn {

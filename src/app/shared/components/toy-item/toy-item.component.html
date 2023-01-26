@@ -1,59 +1,39 @@
 <div class="toy">
-    <div class="content">
-        <h3 class="toy-name">
-            {{ item.title }}
-        </h3>
-        <div class="toy-img__wrapper">
-            <img class="toy-img" [src]="srcImg()" alt="toy-1">
-        </div>
-        <div class="toy-info">
-            <p class="details amount">
-                Amount:
-            </p>
-            <p class="content">
-                {{ item.amount }}
-            </p>
-        </div>
-        <div class="toy-info">
-            <p class="details year">
-                Year of purchase:
-            </p>
-            <p class="content">
-                {{ item.year }}
-            </p>
-        </div>
-        <div class="toy-info">
-            <p class="details shape">
-                Shape of the toy:
-            </p>
-            <p class="content">
-                {{ item.shape }}
-            </p>
-        </div>
-        <div class="toy-info">
-            <p class="details color">
-                Color of the toy:
-            </p>
-            <p class="content">
-                {{ item.color }}
-            </p>
-        </div>
-        <div class="toy-info">
-            <p class="details size">
-                Size of the toy:
-            </p>
-            <p class="content">
-                {{ item.size }}
-            </p>
-        </div>
+    <h3 class="toy-name">
+        {{ item.title }}
+    </h3>
+    <div class="toy-img__wrapper">
+        <img class="toy-img" [src]="srcImg()" alt="toy-1">
+    </div>
+    <div class="toy-info amount">
+        <p class="details amount">
+          In stock
+        </p>
+        <p class="content">
+            {{ item.amount }} pieces
+        </p>
+    </div>
+    <div class="toy-info year">
+        <p class="details year">
+          Manufactured in
+        </p>
+        <p class="content">
+            {{ item.year }}
+        </p>
+    </div>
+    <div class="toy-info size">
+        <p class="details size">
+            This toy is
+        </p>
+        <p class="content">
+            {{ item.size | uppercase }}
+        </p>
+    </div>
 
-        <div class="toy-info">
-            <p class="details fave">
-                Favorite:
-            </p>
-            <p class="content">
-                {{ item.fave ? 'Yes' : 'No' }}
-            </p>
+    <div class="toy-info fave">
+        <div
+          *ngIf = "item.fave"
+          class="details fave">
         </div>
     </div>
     <div class="controls">

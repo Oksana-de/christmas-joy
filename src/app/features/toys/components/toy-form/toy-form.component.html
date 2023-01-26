@@ -7,12 +7,11 @@
     </legend>
 
     <div class="field-wrapper toy-title">
-      <label class="lbl title-lbl">Title:</label>
       <input
       formControlName="title"
         class="inp title-inp"
         type="text"
-        placeholder="Some title..."
+        placeholder="title..."
         required
       >
 
@@ -39,7 +38,7 @@
 
     <div class="field-wrapper amount">
       <label class="lbl amount-lbl" for="">
-        How many toys of this type do you have?
+        Number of toys
       </label>
       <input
       formControlName="amount"
@@ -64,7 +63,7 @@
 
     <div class="field-wrapper year">
       <label class="lbl year-lbl" for="">
-        Purchase year:
+        Year of production:
       </label>
       <input
         formControlName="year"
@@ -95,59 +94,23 @@
 
     <div class="field-wrapper shape">
         <fieldset class="fieldset">
-            <legend  class="fieldset-title">
+            <legend  class="lbl shape-lbl">
                 Shape:
             </legend>
-            <label class="radio-lbl shape-lbl">
-                bell
-                <input
-                    formControlName="shape"
-                    class="inp shape-inp"
-                    type="radio"
-                    value="bell"
-                    id="bell-toy"
-                >
-            </label>
-            <label class="radio-lbl shape-lbl">
-                ball
-                <input
-                    formControlName="shape"
-                    class="inp shape-inp"
-                    type="radio"
-                    value="ball"
-                    id="ball-toy"
-                >
-            </label>
-            <label class="radio-lbl shape-lbl">
-                cone
-                <input
-                    formControlName="shape"
-                    class="inp shape-inp"
-                    type="radio"
-                    value="cone"
-                    id="cone-toy"
-                >
-            </label>
-            <label class="radio-lbl shape-lbl">
-                snowflake
-                <input
-                    formControlName="shape"
-                    class="inp shape-inp"
-                    type="radio"
-                    value="snowflake"
-                    id="snowflake-toy"
-                >
-            </label>
-            <label class="radio-lbl shape-lbl">
-                figurine
-                <input
-                    formControlName="shape"
-                    class="inp shape-inp"
-                    type="radio"
-                    value="figurine"
-                    id="figurine-toy"
-                >
-            </label>
+            <select
+              formControlName="shape"
+              class="inp select-inp shape-inp"
+              type="search"
+              name="toyShape"
+              list="shapes-list"
+              placeholder="--- choose ---"
+            >
+              <option class="shape-opt" value="bell">bell</option>
+              <option class="shape-opt" value="ball">ball</option>
+              <option class="shape-opt" value="cone">cone</option>
+              <option class="shape-opt" value="snowflake">snowflake</option>
+              <option class="shape-opt" value="figurine">figurine</option>
+            </select>
             <div
               *ngIf="toysForm.controls['shape'].invalid && (toysForm.controls['shape'].dirty || toysForm.controls['shape'].touched)"
               class="error"
@@ -159,59 +122,23 @@
 
     <div class="field-wrapper color">
         <fieldset class="fieldset">
-            <legend  class="fieldset-title">
+            <legend  class="lbl color-lbl">
                 Primary Color:
             </legend>
-            <label class="radio-lbl color-lbl">
-                white
-                <input
-                    formControlName="color"
-                    class="inp color-inp"
-                    type="radio"
-                    value="white"
-                    id="white-toy"
-                >
-            </label>
-            <label class="radio-lbl color-lbl">
-                yellow
-                <input
-                    formControlName="color"
-                    class="inp color-inp"
-                    type="radio"
-                    value="yellow"
-                    id="yellow-toy"
-                >
-            </label>
-            <label class="radio-lbl color-lbl">
-                red
-                <input
-                    formControlName="color"
-                    class="inp color-inp"
-                    type="radio"
-                    value="red"
-                    id="red-toy"
-                >
-            </label>
-            <label class="radio-lbl color-lbl">
-                blue
-                <input
-                    formControlName="color"
-                    class="inp color-inp"
-                    type="radio"
-                    value="blue"
-                    id="blue-toy"
-                >
-            </label>
-            <label class="radio-lbl color-lbl">
-                green
-                <input
-                    formControlName="color"
-                    class="inp color-inp"
-                    type="radio"
-                    value="green"
-                    id="green-toy"
-                >
-            </label>
+            <select
+              formControlName="color"
+              class="inp select-inp color-inp"
+              type="search"
+              name="toyColor"
+              list="colors-list"
+              placeholder="--- choose ---"
+            >
+              <option class="color-opt" value="white">white</option>
+              <option class="color-opt" value="yellow">yellow</option>
+              <option class="color-opt" value="red">red</option>
+              <option class="color-opt" value="blue">blue</option>
+              <option class="color-opt" value="green">green</option>
+            </select>
             <div
               *ngIf="toysForm.controls['color'].invalid && (toysForm.controls['color'].dirty || toysForm.controls['color'].touched)"
               class="error"
@@ -223,41 +150,21 @@
 
     <div class="field-wrapper size">
         <fieldset class="fieldset">
-            <legend  class="fieldset-title">
+            <legend  class="lbl size-lbl">
                 Size:
             </legend>
-            <label class="radio-lbl size-lbl">
-                big
-                <input
-                    formControlName="size"
-                    class="inp size-inp"
-                    type="radio"
-                    value="big"
-                    id="big-toy"
-                >
-            </label>
-
-            <label class="radio-lbl size-lbl">
-                middle
-                <input
-                    formControlName="size"
-                    class="inp size-inp"
-                    type="radio"
-                    value="middle"
-                    id="middle-toy"
-                >
-            </label>
-
-            <label class="radio-lbl size-lbl">
-                small
-                <input
-                    formControlName="size"
-                    class="inp size-inp"
-                    type="radio"
-                    value="small"
-                    id="small-toy"
-                >
-            </label>
+            <select
+              formControlName="size"
+              class="inp select-inp size-inp"
+              type="search"
+              name="toySize"
+              list="sizes-list"
+              placeholder="--- choose ---"
+            >
+              <option class="size-opt" value="big">big</option>
+              <option class="size-opt" value="middle">middle</option>
+              <option class="size-opt" value="small">small</option>
+            </select>
             <div
               *ngIf="toysForm.controls['size'].invalid && (toysForm.controls['size'].dirty || toysForm.controls['size'].touched)"
               class="error"
@@ -269,11 +176,10 @@
 
     <div class="field-wrapper fave">
         <fieldset class="fieldset">
-            <legend  class="fieldset-title">
+            <legend  class="lbl fave-lbl">
                 Is this a favorite toy?
             </legend>
             <label class="radio-lbl fave-lbl" for="fave-toy">
-                Yes
                 <input
                     formControlName="fave"
                     class="inp fave-inp"
@@ -281,10 +187,11 @@
                     [value]="true"
                     id="fave-toy"
                 >
+                <span class="custom-check"></span>
+                Yes
             </label>
 
             <label class="radio-lbl fave-lbl" for="not-fave-toy">
-                No
                 <input
                     formControlName="fave"
                     class="inp fave-inp"
@@ -292,6 +199,8 @@
                     [value]="false"
                     id="not-fave-toy"
                 >
+                <span class="custom-check"></span>
+                No
             </label>
             <div
               *ngIf="toysForm.controls['fave'].invalid && (toysForm.controls['fave'].dirty || toysForm.controls['fave'].touched)"
@@ -302,6 +211,7 @@
         </fieldset>
 </div>
 
+<div class="form-controls">
   <button
     class="btn btn-cancel"
     type="button"
@@ -318,4 +228,5 @@
   >
     {{ isFormEdited? 'Edit' : 'Save' }}
   </button>
+</div>
 </form>
