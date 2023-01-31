@@ -325,4 +325,17 @@ export class ToysComponent implements OnInit {
     //     this.data = res;
     // });
   }
+
+  resetFilters() {
+    this.filterForm.reset({
+      amountInputMin: 5,
+      amountInputMax: 10,
+      yearInputMin: 1940,
+      yearInputMax: 2023,
+      shapes: this.buildSizeData(this.toysForUser.shapes).value,
+      colors: this.buildSizeData(this.toysForUser.colors).value,
+      sizes: this.buildSizeData(this.toysForUser.sizes).value,
+      favItem: false
+    });
+  }
 }
