@@ -338,6 +338,10 @@ $transition-duration: .5s;
             background-color: #2f605c;
             border-radius: 0;
           }
+
+          @media (max-width: 420px) {
+            width: 100vw;
+          }
             .settings__lbl {
                 margin-bottom: 20px;
             }
@@ -696,7 +700,7 @@ $transition-duration: .5s;
     .control {
       display: block;
       margin-right: 15px;
-      padding: 7px 25px;
+      padding: 7px 10px;
       width: 140px;
       height: 28px;
       background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(157, 243, 255, 0.2) 100%);
